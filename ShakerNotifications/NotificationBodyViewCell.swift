@@ -159,18 +159,18 @@ class NotificationBodyViewCell: UITableViewCell {
             descriptionContainerView.right == superview.right - 10 ~ 751
         }
         
-        self.descriptionButton.backgroundColor = UIColor.clearColor()
+        self.descriptionButton.backgroundColor = UIColor.blackColor()
         self.descriptionButton.setTitle("SHIT", forState: .Normal)
         self.descriptionButton.layer.shouldRasterize = true
         self.descriptionButton.layer.rasterizationScale = UIScreen.mainScreen().scale
         
-        self.nameLabel.backgroundColor = UIColor.whiteColor()
+        self.nameLabel.backgroundColor = UIColor.grayColor()
         self.nameLabel.clipsToBounds = false
         self.nameLabel.textColor = UIColor.blackColor()
         self.nameLabel.numberOfLines = 0
         self.nameLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
-        self.descriptionLabel.backgroundColor = UIColor.whiteColor()
+        self.descriptionLabel.backgroundColor = UIColor.blueColor()
         self.descriptionLabel.clipsToBounds = false
         self.descriptionLabel.textColor = UIColor.lightGrayColor()
         self.descriptionLabel.numberOfLines = 0
@@ -179,29 +179,46 @@ class NotificationBodyViewCell: UITableViewCell {
         self.descriptionContainerView.addSubview(self.descriptionButton)
         self.descriptionContainerView.addSubview(self.nameLabel)
         self.descriptionContainerView.addSubview(self.descriptionLabel)
-        /*
-        constrain(descriptionContainerView, descriptionButton, descriptionLabel, nameLabel) { descriptionContainerView, button, description, name in
-
-            name.top == descriptionContainerView.top + 10
-            name.leading == descriptionContainerView.trailing + 10
-            description.leading == descriptionContainerView.trailing + 10
-            description.top == name.bottom + 1
-            descriptionContainerView.trailing == button.trailing + 15
-            button.leading == name.trailing + 10
-            button.leading == description.trailing + 10
-            button.top == descriptionContainerView.top + 10
-            
-        }
-        */
-        constrain(descriptionButton) { descriptionButton in
+        
+        constrain(descriptionButton, descriptionLabel, nameLabel) { descriptionButton, descriptionLabel, nameLabel in
+            guard let superview = nameLabel.superview else { return }
             
             descriptionButton.width == 35
             descriptionButton.height == 35
-            descriptionButton.superview!.trailing == descriptionButton.trailing + 15
-//            button.leading == name.trailing + 10
-//            descriptionButton.leading == description.trailing + 10
-            descriptionButton.top == descriptionButton.superview!.top + 10
+            descriptionButton.right == superview.right - 15
+            descriptionButton.top == superview.top + 10
             
+            nameLabel.top == superview.top + 10
+            nameLabel.left == superview.left + 10
+            nameLabel.right == descriptionButton.left - 10
+            
+            descriptionLabel.top == nameLabel.bottom + 1
+            descriptionLabel.bottom == superview.bottom - 10 ~ 752
+            descriptionLabel.left == superview.left + 10
+            descriptionLabel.right == descriptionButton.left - 10
+
+            
+
+//            name.top == superview.top + 10
+//            name.left == superview.right + 10
+//            
+//            description.left == superview.right + 10
+//            description.top == name.bottom + 1
+//            
+//            superview.right == button.right + 15
+//            
+//            button.left == name.right + 10
+//            button.left == description.right + 10
+//            button.top == superview.top + 10
+            
+        }
+        
+        constrain(descriptionButton) { descriptionButton in
+//            guard let superview = descriptionButton.superview else { return }
+//            descriptionButton.width == 35
+//            descriptionButton.height == 35
+//            superview.right == descriptionButton.right + 15
+//            descriptionButton.top == superview.top + 10
         }
         
     }
