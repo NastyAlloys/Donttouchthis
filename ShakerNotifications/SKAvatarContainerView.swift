@@ -13,8 +13,8 @@ import Cartography
 class SKAvatarContainerView: UIView {
     // MARK: - Properties -
     
-    var avatarImageView = UIImageView()
-    var iconImageView = UIImageView()
+    //    var avatarImageView = UIImageView()
+    var iconImageView: UIImageView!
     let defaultImage = UIImage(named: "avatar.placeholder.png")
     weak var currentAvatarView: UIView?
     
@@ -24,6 +24,16 @@ class SKAvatarContainerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.commonInit()
+    }
+    
+    private func commonInit() {
         let avatarButton = self.configureButton()
         addSubview(avatarButton)
         
@@ -64,9 +74,9 @@ class SKAvatarContainerView: UIView {
         iconImageView = self.configureIconImageView()
         addSubview(iconImageView)
         bringSubviewToFront(iconImageView)
-
+        
         constrain(avatarButton, iconImageView) { avatarButton, iconImageView in
-            guard let superview = iconImageView.superview else { return }
+            //            guard let superview = iconImageView.superview else { return }
             
             iconImageView.width == 15
             iconImageView.height == 15
@@ -74,18 +84,9 @@ class SKAvatarContainerView: UIView {
             iconImageView.bottom == avatarButton.bottom
             iconImageView.right == avatarButton.right
         }
-
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init () {
-        self.init(frame:CGRect.zero)
-    }
-    
-    func configureButton() -> UIButton {
+    private func configureButton() -> UIButton {
         let button = UIButton()
         button.setImage(defaultImage, forState: .Normal)
         button.setTitle("", forState: .Normal)
@@ -103,10 +104,10 @@ class SKAvatarContainerView: UIView {
         return button
     }
     
-    func configureIconImageView() -> UIImageView {
+    private func configureIconImageView() -> UIImageView {
         let iconImageView = UIImageView()
         
-        iconImageView.backgroundColor = UIColor.whiteColor()
+        iconImageView.backgroundColor = UIColor.clearColor()
         iconImageView.contentMode = UIViewContentMode.ScaleAspectFill
         iconImageView.layer.shouldRasterize = true
         iconImageView.layer.rasterizationScale = UIScreen.mainScreen().scale
@@ -119,10 +120,10 @@ class SKAvatarContainerView: UIView {
         return iconImageView
     }
     
-    func configureImageView() -> UIImageView {
+    private func configureImageView() -> UIImageView {
         let imageView = UIImageView()
-            
-//        imageView.image = defaultImage
+        
+        //        imageView.image = defaultImage
         imageView.backgroundColor = UIColor.lightGrayColor()
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
         imageView.layer.shouldRasterize = true
@@ -133,6 +134,41 @@ class SKAvatarContainerView: UIView {
         imageView.layer.borderColor = UIColor.whiteColor().CGColor
         
         return imageView
+    }
+    
+    func reset() {
+        let subviews = self.subviews
+        
+        for view in subviews {
+            if let view = view as? UIImageView where view !== iconImageView {
+                view.image = defaultImage
+                view.hidden = true
+            } else if let button = view as? UIButton {
+                button.setImage(defaultImage, forState: .Normal)
+            }
+        }
+    }
+    
+    func reload(images: [String]) {
+        let subviews = self.subviews
+        
+        var imageIndex = 0
+        
+        for view in subviews.reverse() {
+            guard imageIndex < images.count else { break }
+            let image = images[imageIndex]
+            
+            if let view = view as? UIButton {
+                view.setImage(UIImage(named: image), forState: .Normal)
+            } else if let view = view as? UIImageView where view !== iconImageView {
+                view.hidden = false
+                view.image = UIImage(named: image)
+            } else {
+                continue
+            }
+            
+            imageIndex++
+        }
     }
     
 }
