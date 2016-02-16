@@ -34,6 +34,8 @@ class SKAvatarContainerView: UIView {
     }
     
     private func commonInit() {
+        self.clipsToBounds = true
+        
         let avatarButton = self.configureButton()
         addSubview(avatarButton)
         
