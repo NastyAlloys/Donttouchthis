@@ -11,16 +11,9 @@ import TTTAttributedLabel
 import Foundation
 import Cartography
 
-
-class SKAvatarContainerView {
-    
-}
-
 struct LayoutConstants {
     static let buttonHeight: CGFloat = 35
 }
-
-
 
 class NotificationBodyViewCell: UITableViewCell {
     
@@ -38,7 +31,7 @@ class NotificationBodyViewCell: UITableViewCell {
     var avatarImage: UIImage!
     var avatarImageView: UIImageView!
     
-    var iconImageView: UIImageView!
+//    var iconImageView = UIImageView()
     
     var nameLabel = UILabel() as UILabel!
     var descriptionLabel = UILabel() as UILabel!
@@ -68,22 +61,20 @@ class NotificationBodyViewCell: UITableViewCell {
         
         self.clipsToBounds = true
         
-        let whiteColor: UIColor = UIColor.whiteColor()
-        
-        self.avatarContainerView = UIView()
+        self.avatarContainerView = SKAvatarContainerView.init()
         // Добавляем два главных контейнера:
         // 1 - для аватара/-ов
         // 2 - для описания нотификации
         avatarContainerView.clipsToBounds = false
         contentView.addSubview(self.avatarContainerView)
         contentView.addSubview(self.descriptionContainerView)
-        
+        /*
         // настройка главного Subview класса UIButton в avatarContainerView
         avatarButton.backgroundColor = UIColor.lightGrayColor()
         avatarButton.layer.cornerRadius = 16.5
         avatarButton.layer.borderWidth = 1
         avatarButton.layer.borderColor = whiteColor.CGColor
-        avatarButton.layer.masksToBounds = true
+//        avatarButton.layer.masksToBounds = false
         avatarButton.setImage(defaultImage, forState: .Normal)
         avatarButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         avatarButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
@@ -91,6 +82,17 @@ class NotificationBodyViewCell: UITableViewCell {
         avatarButton.setTitle("", forState: .Normal)
         avatarButton.layer.shouldRasterize = true
         avatarButton.layer.rasterizationScale = UIScreen.mainScreen().scale
+        
+        iconImageView.backgroundColor = UIColor.clearColor()
+        iconImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        iconImageView.layer.shouldRasterize = true
+        iconImageView.layer.rasterizationScale = UIScreen.mainScreen().scale
+        iconImageView.layer.masksToBounds = true
+        iconImageView.hidden = false
+        iconImageView.image = UIImage(named: "icon-notify-like")
+        
+        avatarButton.addSubview(self.iconImageView)
+        avatarButton.bringSubviewToFront(self.iconImageView)
         
         avatarContainerView.addSubview(avatarButton)
         
@@ -137,15 +139,21 @@ class NotificationBodyViewCell: UITableViewCell {
         avatarImageView = UIImageView(image: avatarImage)
         avatarImageView.frame = CGRectMake(0, 0, 35, 35)
         
-        constrain(avatarButton) { avatarButton in
+        constrain(avatarButton, iconImageView) { avatarButton, iconImageView in
             guard let superview = avatarButton.superview else { return }
             avatarButton.width == 35
             avatarButton.height == 35
             avatarButton.top == superview.top
             avatarButton.left == superview.left
             avatarButton.right == superview.right
+            
+            iconImageView.width == 15
+            iconImageView.height == 15
+            
+            avatarButton.bottom == iconImageView.bottom
+            iconImageView.right == avatarButton.right
         }
-        
+        */
         self.descriptionContainerView.clipsToBounds = true
         
         constrain(avatarContainerView, descriptionContainerView) { avatarContainerView, descriptionContainerView in
@@ -188,52 +196,30 @@ class NotificationBodyViewCell: UITableViewCell {
             descriptionButton.right == superview.right - 15
             descriptionButton.top == superview.top + 10
             
-            nameLabel.top == superview.top + 10
             nameLabel.left == superview.left + 10
+            nameLabel.top == superview.top + 10
             nameLabel.right == descriptionButton.left - 10
             
             descriptionLabel.top == nameLabel.bottom + 1
             descriptionLabel.bottom == superview.bottom - 10 ~ 752
             descriptionLabel.left == superview.left + 10
             descriptionLabel.right == descriptionButton.left - 10
-
             
-
-//            name.top == superview.top + 10
-//            name.left == superview.right + 10
-//            
-//            description.left == superview.right + 10
-//            description.top == name.bottom + 1
-//            
-//            superview.right == button.right + 15
-//            
-//            button.left == name.right + 10
-//            button.left == description.right + 10
-//            button.top == superview.top + 10
-            
-        }
-        
-        constrain(descriptionButton) { descriptionButton in
-//            guard let superview = descriptionButton.superview else { return }
-//            descriptionButton.width == 35
-//            descriptionButton.height == 35
-//            superview.right == descriptionButton.right + 15
-//            descriptionButton.top == superview.top + 10
+            nameLabel.height == descriptionLabel.height
         }
         
     }
     
     func reset() {
         self.selectionStyle = .None
-        
-        avatarButton.setImage(defaultImage, forState: .Normal)
-        
         let subviews = avatarContainerView.subviews
         
         for view in subviews {
             if let view = view as? UIImageView {
                 view.image = defaultImage
                 view.hidden = true
+            } else if let button = view as? UIButton {
+                button.setImage(defaultImage, forState: .Normal)
             }
         }
     }
@@ -242,6 +228,7 @@ class NotificationBodyViewCell: UITableViewCell {
         guard let images = cellData["images"] else { return }
         
         let subviews = avatarContainerView.subviews
+        
         var imageIndex = 0
         
         for view in subviews.reverse() {

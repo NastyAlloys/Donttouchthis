@@ -13,18 +13,18 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     let users = [
         [
             "images": [
-                "icon-button-liked",
-                "icon-button-liked"
+                "avatar",
+                "avatar"
             ]
         ], [
             "images": [
-                "icon-button-liked",
-                "icon-button-liked",
-                "icon-button-liked"
+                "avatar",
+                "avatar",
+                "avatar"
             ]
         ], [
             "images": [
-                "icon-button-liked"
+                "avatar"
             ]
         ]
         
