@@ -17,7 +17,7 @@ struct LayoutConstants {
 
 class NotificationBodyViewCell: UITableViewCell {
     
-    var avatarContainerView: UIView!// = UIView()
+    var avatarContainerView: SKAvatarContainerView!// = UIView()
     var descriptionContainerView = UIView()
     
     var avatarContainerConstraint: NSLayoutConstraint!
@@ -31,12 +31,12 @@ class NotificationBodyViewCell: UITableViewCell {
     var avatarImage: UIImage!
     var avatarImageView: UIImageView!
     
-//    var iconImageView = UIImageView()
+    //    var iconImageView = UIImageView()
     
     var nameLabel = UILabel() as UILabel!
     var descriptionLabel = UILabel() as UILabel!
     var descriptionButton = UIButton() as UIButton!
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -56,12 +56,12 @@ class NotificationBodyViewCell: UITableViewCell {
         self.reset()
     }
     
-    // MARK: define avatar UIViews & ImageViews    
+    // MARK: define avatar UIViews & ImageViews
     func setUpViews() {
         
         self.clipsToBounds = true
         
-        self.avatarContainerView = SKAvatarContainerView.init()
+        self.avatarContainerView = SKAvatarContainerView()
         // Добавляем два главных контейнера:
         // 1 - для аватара/-ов
         // 2 - для описания нотификации
@@ -74,7 +74,7 @@ class NotificationBodyViewCell: UITableViewCell {
         avatarButton.layer.cornerRadius = 16.5
         avatarButton.layer.borderWidth = 1
         avatarButton.layer.borderColor = whiteColor.CGColor
-//        avatarButton.layer.masksToBounds = false
+        //        avatarButton.layer.masksToBounds = false
         avatarButton.setImage(defaultImage, forState: .Normal)
         avatarButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         avatarButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
@@ -97,42 +97,42 @@ class NotificationBodyViewCell: UITableViewCell {
         avatarContainerView.addSubview(avatarButton)
         
         currentAvatarView = avatarButton
-
+        
         let numberOfSubContainers = 2
         
         for var i = 0; i < numberOfSubContainers; i++ {
-           
-//            let frame = currentAvatarView.frame
-            
-            let imageView = UIImageView()
-            
-            imageView.image = defaultImage
-            imageView.backgroundColor = UIColor.lightGrayColor()
-            imageView.contentMode = UIViewContentMode.ScaleAspectFill
-            imageView.layer.shouldRasterize = true
-            imageView.layer.rasterizationScale = UIScreen.mainScreen().scale
-            imageView.layer.cornerRadius = 16.5
-            imageView.layer.masksToBounds = true
-            imageView.layer.borderWidth = 1
-            imageView.layer.borderColor = whiteColor.CGColor
-            
-            avatarContainerView.addSubview(imageView)
-            avatarContainerView.sendSubviewToBack(imageView)
-            
-            do {
-                guard let currentAvatarView = currentAvatarView  else { continue }
-                
-                constrain(imageView, currentAvatarView) { avatarButton, currentAvatarView in
-                    guard let superview = avatarButton.superview else { return }
-                    avatarButton.width == currentAvatarView.width
-                    avatarButton.height == currentAvatarView.height
-                    avatarButton.top == currentAvatarView.top + 3
-                    avatarButton.left == currentAvatarView.left
-                    avatarButton.bottom == superview.bottom ~ UILayoutPriority(900 + i)
-                }
-            }
-            
-            currentAvatarView = imageView
+        
+        //            let frame = currentAvatarView.frame
+        
+        let imageView = UIImageView()
+        
+        imageView.image = defaultImage
+        imageView.backgroundColor = UIColor.lightGrayColor()
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.layer.shouldRasterize = true
+        imageView.layer.rasterizationScale = UIScreen.mainScreen().scale
+        imageView.layer.cornerRadius = 16.5
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = whiteColor.CGColor
+        
+        avatarContainerView.addSubview(imageView)
+        avatarContainerView.sendSubviewToBack(imageView)
+        
+        do {
+        guard let currentAvatarView = currentAvatarView  else { continue }
+        
+        constrain(imageView, currentAvatarView) { avatarButton, currentAvatarView in
+        guard let superview = avatarButton.superview else { return }
+        avatarButton.width == currentAvatarView.width
+        avatarButton.height == currentAvatarView.height
+        avatarButton.top == currentAvatarView.top + 3
+        avatarButton.left == currentAvatarView.left
+        avatarButton.bottom == superview.bottom ~ UILayoutPriority(900 + i)
+        }
+        }
+        
+        currentAvatarView = imageView
         }
         
         avatarImage = UIImage(named: "avatar.placeholder.png")
@@ -140,18 +140,18 @@ class NotificationBodyViewCell: UITableViewCell {
         avatarImageView.frame = CGRectMake(0, 0, 35, 35)
         
         constrain(avatarButton, iconImageView) { avatarButton, iconImageView in
-            guard let superview = avatarButton.superview else { return }
-            avatarButton.width == 35
-            avatarButton.height == 35
-            avatarButton.top == superview.top
-            avatarButton.left == superview.left
-            avatarButton.right == superview.right
-            
-            iconImageView.width == 15
-            iconImageView.height == 15
-            
-            avatarButton.bottom == iconImageView.bottom
-            iconImageView.right == avatarButton.right
+        guard let superview = avatarButton.superview else { return }
+        avatarButton.width == 35
+        avatarButton.height == 35
+        avatarButton.top == superview.top
+        avatarButton.left == superview.left
+        avatarButton.right == superview.right
+        
+        iconImageView.width == 15
+        iconImageView.height == 15
+        
+        avatarButton.bottom == iconImageView.bottom
+        iconImageView.right == avatarButton.right
         }
         */
         self.descriptionContainerView.clipsToBounds = true
@@ -160,7 +160,7 @@ class NotificationBodyViewCell: UITableViewCell {
             guard let superview = avatarContainerView.superview else { return }
             avatarContainerView.left == superview.left + 10
             avatarContainerView.top == superview.top + 10
-
+            
             descriptionContainerView.top == avatarContainerView.top
             descriptionContainerView.left == avatarContainerView.right + 8
             descriptionContainerView.bottom == superview.bottom
@@ -212,37 +212,12 @@ class NotificationBodyViewCell: UITableViewCell {
     
     func reset() {
         self.selectionStyle = .None
-        let subviews = avatarContainerView.subviews
-        
-        for view in subviews {
-            if let view = view as? UIImageView {
-                view.image = defaultImage
-                view.hidden = true
-            } else if let button = view as? UIButton {
-                button.setImage(defaultImage, forState: .Normal)
-            }
-        }
+        self.avatarContainerView.reset()
     }
     
     func reload(cellData: [String: [String]]) {
         guard let images = cellData["images"] else { return }
         
-        let subviews = avatarContainerView.subviews
-        
-        var imageIndex = 0
-        
-        for view in subviews.reverse() {
-            guard imageIndex < images.count else { break }
-            let image = images[imageIndex]
-            
-            if let view = view as? UIButton {
-                view.setImage(UIImage(named: image), forState: .Normal)
-            } else if let view = view as? UIImageView {
-                view.hidden = false
-                view.image = UIImage(named: image)
-            }
-            
-            imageIndex++
-        }
+        self.avatarContainerView.reload(images)
     }
 }
