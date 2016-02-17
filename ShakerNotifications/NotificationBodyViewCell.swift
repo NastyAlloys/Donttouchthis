@@ -12,10 +12,11 @@ import Foundation
 import Cartography
 
 class NotificationBodyViewCell: UITableViewCell {
-    
+    // MARK: - Properties -
     var avatarContainerView: SKAvatarContainerView!
     var descriptionContainerView: SKDescriptionContainerView!
     
+   // MARK: - Initialization - 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -35,7 +36,10 @@ class NotificationBodyViewCell: UITableViewCell {
         self.reset()
     }
     
-    // MARK: define avatar UIViews & ImageViews
+    /*
+        Настройка контейнеров для аватаров и для описания и
+        constrain для них
+    */
     func setUpViews() {
         
         self.clipsToBounds = true
@@ -45,8 +49,6 @@ class NotificationBodyViewCell: UITableViewCell {
         
         contentView.addSubview(self.avatarContainerView)
         contentView.addSubview(self.descriptionContainerView)
-        
-        self.descriptionContainerView.clipsToBounds = true
         
         constrain(avatarContainerView, descriptionContainerView) { avatarContainerView, descriptionContainerView in
             guard let superview = avatarContainerView.superview else { return }
@@ -61,11 +63,17 @@ class NotificationBodyViewCell: UITableViewCell {
         
     }
     
+    /*
+        Сброс вьюхи для переиспользования ячейки
+    */
     func reset() {
         self.selectionStyle = .None
         self.avatarContainerView.reset()
     }
     
+    /*
+        Апдейт ячейки
+    */
     func reload(cellData: [String: [String]]) {
         guard let images = cellData["images"] else { return }
         

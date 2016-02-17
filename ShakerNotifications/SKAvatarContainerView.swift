@@ -12,15 +12,13 @@ import Cartography
 
 class SKAvatarContainerView: UIView {
     // MARK: - Properties -
-    
-    //    var avatarImageView = UIImageView()
     var iconImageView: UIImageView!
     let defaultImage = UIImage(named: "avatar.placeholder.png")
     weak var currentAvatarView: UIView?
     
     let numberOfSubContainers = 2
     
-    // MARK: Initialization
+    // MARK: - Initialization -
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -88,6 +86,7 @@ class SKAvatarContainerView: UIView {
         }
     }
     
+    // MARK: - UIView configuration -
     private func configureButton() -> UIButton {
         let button = UIButton()
         button.setImage(defaultImage, forState: .Normal)
@@ -138,6 +137,7 @@ class SKAvatarContainerView: UIView {
         return imageView
     }
     
+    // MARK: - UIView update -
     func reset() {
         let subviews = self.subviews
         

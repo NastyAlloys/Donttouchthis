@@ -15,6 +15,7 @@
 		490B1C4E1C6B443D00266E87 /* ShakerNotificationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C4D1C6B443D00266E87 /* ShakerNotificationsUITests.swift */; };
 		490B1C5C1C6B503500266E87 /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */; };
 		490B1C5E1C6B516600266E87 /* NotificationBodyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */; };
+		493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */; };
 		4949799F1C7328AF0097E156 /* SKAvatarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */; };
 		494979A11C7378F00097E156 /* SKDescriptionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */; };
 		AB64788175A1AC6E992CFCEC /* Pods_ShakerNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 331DCD6C38BAEC6D3FAFF1C2 /* Pods_ShakerNotifications.framework */; };
@@ -54,6 +55,7 @@
 		490B1C4F1C6B443D00266E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitesViewController.swift; sourceTree = "<group>"; };
 		490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBodyViewCell.swift; sourceTree = "<group>"; };
+		493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFooterViewCell.swift; sourceTree = "<group>"; };
 		4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAvatarContainerView.swift; sourceTree = "<group>"; };
 		494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKDescriptionContainerView.swift; sourceTree = "<group>"; };
 		E5EED06EE39E818D5411F361 /* Pods-ShakerNotifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShakerNotifications.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShakerNotifications/Pods-ShakerNotifications.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,9 +118,8 @@
 				490B1C361C6B443D00266E87 /* LaunchScreen.storyboard */,
 				490B1C391C6B443D00266E87 /* Info.plist */,
 				490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */,
-				490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */,
-				4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */,
-				494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */,
+				493E6D761C7460EC00379904 /* BodyViewCell */,
+				493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */,
 			);
 			path = ShakerNotifications;
 			sourceTree = "<group>";
@@ -139,6 +140,16 @@
 				490B1C4F1C6B443D00266E87 /* Info.plist */,
 			);
 			path = ShakerNotificationsUITests;
+			sourceTree = "<group>";
+		};
+		493E6D761C7460EC00379904 /* BodyViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */,
+				4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */,
+				494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */,
+			);
+			name = BodyViewCell;
 			sourceTree = "<group>";
 		};
 		D109CE4E1DF4699611C635D1 /* Frameworks */ = {
@@ -340,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				490B1C301C6B443D00266E87 /* ViewController.swift in Sources */,
+				493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */,
 				4949799F1C7328AF0097E156 /* SKAvatarContainerView.swift in Sources */,
 				490B1C2E1C6B443D00266E87 /* AppDelegate.swift in Sources */,
 				490B1C5C1C6B503500266E87 /* ActivitesViewController.swift in Sources */,
@@ -479,10 +491,13 @@
 			baseConfigurationReference = E5EED06EE39E818D5411F361 /* Pods-ShakerNotifications.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ShakerNotifications/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Shaker.ShakerNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShakerNotifications/ShakerNotifications-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -491,10 +506,12 @@
 			baseConfigurationReference = 1B2FD694F73F9DCD46DC06CA /* Pods-ShakerNotifications.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ShakerNotifications/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Shaker.ShakerNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShakerNotifications/ShakerNotifications-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -11,7 +11,7 @@ import UIKit
 import Cartography
 
 class SKDescriptionContainerView: UIView {
-    // MARK: Initialization
+    // MARK: - Initialization -
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -57,6 +57,7 @@ class SKDescriptionContainerView: UIView {
         }
     }
     
+    // MARK: - UIView configuration -
     private func configureDescriptionButton() -> UIButton {
         let descriptionButton = UIButton()
         
@@ -92,7 +93,7 @@ class SKDescriptionContainerView: UIView {
         return descriptionLabel
     }
     
-    
+    // MARK: - UIView update -
     func reset() {
         
     }
