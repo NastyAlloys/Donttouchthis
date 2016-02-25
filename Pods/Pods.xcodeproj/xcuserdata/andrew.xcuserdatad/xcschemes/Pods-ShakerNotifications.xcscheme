@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F267D6B7EE8B1DEB0F09BA8D'
+               BlueprintIdentifier = 'C8080AECFCFF67332644148D'
                BlueprintName = 'Pods-ShakerNotifications'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_ShakerNotifications.framework'>

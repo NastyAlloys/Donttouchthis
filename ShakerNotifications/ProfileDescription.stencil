@@ -1,0 +1,1 @@
+{% for user_name in user_names %}{% ifnot user_names.last %}{{ user_name }}, {% else %} {{ user_name }} {% endif %}{% endfor %}{% if user_names.count > 1 %}подписались{% else %} подписался(ась)

@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import Cartography
+import SwiftyJSON
 
 class SKAvatarContainerView: UIView {
     // MARK: - Properties -
     var iconImageView: UIImageView!
     let defaultImage = UIImage(named: "avatar.placeholder.png")
+    var avatarButton: UIButton!
     weak var currentAvatarView: UIView?
     
     let numberOfSubContainers = 2
@@ -34,10 +36,10 @@ class SKAvatarContainerView: UIView {
     private func commonInit() {
         self.clipsToBounds = true
         
-        let avatarButton = self.configureButton()
-        addSubview(avatarButton)
+        self.configureButton()
+        addSubview(self.avatarButton)
         
-        constrain(avatarButton) { avatarButton in
+        constrain(self.avatarButton) { avatarButton in
             guard let superview = avatarButton.superview else { return }
             avatarButton.width == 35
             avatarButton.height == 35
@@ -46,8 +48,8 @@ class SKAvatarContainerView: UIView {
             avatarButton.right == superview.right
         }
         
-        currentAvatarView = avatarButton
-        
+        currentAvatarView = self.avatarButton
+        /*
         for var i = 0; i < numberOfSubContainers; i++ {
             
             let imageView = self.configureImageView()
@@ -69,7 +71,7 @@ class SKAvatarContainerView: UIView {
             }
             
             currentAvatarView = imageView
-        }
+        }*/
         
         iconImageView = self.configureIconImageView()
         addSubview(iconImageView)
@@ -87,22 +89,21 @@ class SKAvatarContainerView: UIView {
     }
     
     // MARK: - UIView configuration -
-    private func configureButton() -> UIButton {
-        let button = UIButton()
-        button.setImage(defaultImage, forState: .Normal)
-        button.setTitle("", forState: .Normal)
-        button.backgroundColor = UIColor.lightGrayColor()
-        button.layer.cornerRadius = 16.5
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.whiteColor().CGColor
-        button.layer.masksToBounds = true
-        button.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        button.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        button.layer.shouldRasterize = true
-        button.layer.rasterizationScale = UIScreen.mainScreen().scale
+    private func configureButton() {
+        self.avatarButton = UIButton()
         
-        return button
+        self.avatarButton.setImage(defaultImage, forState: .Normal)
+        self.avatarButton.setTitle("", forState: .Normal)
+        self.avatarButton.backgroundColor = UIColor.lightGrayColor()
+        self.avatarButton.layer.cornerRadius = 16.5
+        self.avatarButton.layer.borderWidth = 1
+        self.avatarButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.avatarButton.layer.masksToBounds = true
+        self.avatarButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
+        self.avatarButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        self.avatarButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        self.avatarButton.layer.shouldRasterize = true
+        self.avatarButton.layer.rasterizationScale = UIScreen.mainScreen().scale
     }
     
     private func configureIconImageView() -> UIImageView {
@@ -151,9 +152,22 @@ class SKAvatarContainerView: UIView {
         }
     }
     
-    func reload(images: [String]) {
-        let subviews = self.subviews
+    func reload(cellData: JSON) {
+//        guard let images = cellData["images"] else { return }
         
+        guard let user_avatar = cellData["user_avatar"].string else { return }
+        
+        let imageUrl = NSURL(string: user_avatar)
+        let imageData = NSData(contentsOfURL: imageUrl!)
+        let image: UIImage = UIImage(data: imageData!)!
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.avatarButton.setImage(image, forState: .Normal)
+        })
+
+        /*
+        let subviews = self.subviews
+
         var imageIndex = 0
         
         for view in subviews.reverse() {
@@ -161,16 +175,18 @@ class SKAvatarContainerView: UIView {
             let image = images[imageIndex]
             
             if let view = view as? UIButton {
-                view.setImage(UIImage(named: image), forState: .Normal)
-            } else if let view = view as? UIImageView where view !== iconImageView {
+                view.imageView?.imageFromUrl(user_avatar)
+                view.setImage(UIImage(named: user_avatar), forState: .Normal)
+            }
+            else if let view = view as? UIImageView where view !== iconImageView {
                 view.hidden = false
                 view.image = UIImage(named: image)
             } else {
                 continue
             }
-            
+        
             imageIndex++
-        }
+        }*/
     }
     
 }

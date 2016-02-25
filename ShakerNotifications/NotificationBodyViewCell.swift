@@ -77,6 +77,6 @@ class NotificationBodyViewCell: UITableViewCell {
     func reload(cellData: [String: [String]]) {
         guard let images = cellData["images"] else { return }
         
-        self.avatarContainerView.reload(images)
+//        self.avatarContainerView.reload(images)
     }
 }

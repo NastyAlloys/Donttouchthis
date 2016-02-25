@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
+import Cartography
+import SwiftyJSON
 
 class NotifiCationFooterViewCell: UITableViewCell {
     
     // MARK: - Properties -
-    var timeLabel: UIlabel!
+    var timeLabel: UILabel!
     var separatorView: UIView!
     
     // MARK: - Initialization -
@@ -28,9 +30,50 @@ class NotifiCationFooterViewCell: UITableViewCell {
         self.setUpViews()
     }
     
-    func setupViews() {
+    func setUpViews() {
         self.clipsToBounds = true
         
-        self.separatorView.mas_key
+        self.separatorView = UIView()
+        self.timeLabel = UILabel()
+        
+        self.separatorView.backgroundColor = UIColor.grayColor()
+        contentView.addSubview(self.separatorView)
+        
+        self.reset()
+        
+        self.timeLabel.backgroundColor = UIColor.whiteColor()
+        self.timeLabel.textColor = UIColor.grayColor()
+//        self.timeLabel.font = nil
+        self.timeLabel.lineBreakMode = .ByTruncatingTail
+        contentView.addSubview(self.timeLabel)
+        
+        constrain(self.separatorView, self.timeLabel) { separatorView, timeLabel in
+            guard let superview = separatorView.superview else { return }
+            separatorView.height == ViewConstants.separatorHeight
+            separatorView.left == superview.left
+            separatorView.bottom == superview.bottom
+            separatorView.right == superview.right
+            timeLabel.left == superview.left + 60
+            timeLabel.right == superview.right - 15
+            timeLabel.top == superview.top
+        }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.reset()
+    }
+    
+    func reset() {
+        self.selectionStyle = .None
+    }
+    
+    func reload(json: JSON) {
+        self.timeLabel.text = "timestring"
+    }
+    
+    func getCellHeight() -> CGFloat {
+        return round(15 + 10)
+    }
+    
 }

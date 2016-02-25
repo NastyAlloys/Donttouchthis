@@ -4,12 +4,32 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Cartography.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PathKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ShakerNotifications.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Stencil.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>072C1B1AE4426D819F3DC71FEB215AD7</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6762C0D58AEA1523BE320DE86A0AFA7A</key>
+		<key>96F3148B2A751586915800EC323DC232</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A22914A3458F63A6D76F43905A2CA4A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C3A04698AAE4D6124C20602D622956E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1AAA5F0DDD54BA3818FCB8ED9E48A44</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB187E9766F21BE211F7A6D0F848CF7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F8DBBC6BB5AD1EBD4E9C618B36F18963</key>
 		<dict>
 			<key>primary</key>
 			<true/>

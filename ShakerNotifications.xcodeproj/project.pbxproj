@@ -15,9 +15,20 @@
 		490B1C4E1C6B443D00266E87 /* ShakerNotificationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C4D1C6B443D00266E87 /* ShakerNotificationsUITests.swift */; };
 		490B1C5C1C6B503500266E87 /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */; };
 		490B1C5E1C6B516600266E87 /* NotificationBodyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */; };
+		493DEFBD1C787200006AD9B9 /* NotificationJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 493DEFBC1C787200006AD9B9 /* NotificationJSON.json */; };
 		493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */; };
 		4949799F1C7328AF0097E156 /* SKAvatarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */; };
 		494979A11C7378F00097E156 /* SKDescriptionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */; };
+		497C0A281C7DD76300D4356E /* LikeDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497C0A271C7DD76300D4356E /* LikeDescriptionView.swift */; };
+		497C0A2A1C7DE13F00D4356E /* ProfileDescription.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 497C0A291C7DE13F00D4356E /* ProfileDescription.stencil */; };
+		497F6C261C760A4D0007D40C /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F6C251C760A4D0007D40C /* NotificationCell.swift */; };
+		497F6C281C7614FF0007D40C /* SKUserNameContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F6C271C7614FF0007D40C /* SKUserNameContainerView.swift */; };
+		498342AA1C771CD500BB7F3B /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498342A91C771CD500BB7F3B /* DescriptionView.swift */; };
+		498342AC1C771FA100BB7F3B /* ProfileNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498342AB1C771FA100BB7F3B /* ProfileNotificationCell.swift */; };
+		498342AE1C772F0900BB7F3B /* ProfileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */; };
+		4991AE691C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991AE681C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift */; };
+		49A0897B1C75B84B007BAA2E /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0897A1C75B84B007BAA2E /* ViewConstants.swift */; };
+		49A0897D1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */; };
 		AB64788175A1AC6E992CFCEC /* Pods_ShakerNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 331DCD6C38BAEC6D3FAFF1C2 /* Pods_ShakerNotifications.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,9 +66,20 @@
 		490B1C4F1C6B443D00266E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitesViewController.swift; sourceTree = "<group>"; };
 		490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBodyViewCell.swift; sourceTree = "<group>"; };
+		493DEFBC1C787200006AD9B9 /* NotificationJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = NotificationJSON.json; path = ../NotificationJSON.json; sourceTree = "<group>"; };
 		493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFooterViewCell.swift; sourceTree = "<group>"; };
 		4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAvatarContainerView.swift; sourceTree = "<group>"; };
 		494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKDescriptionContainerView.swift; sourceTree = "<group>"; };
+		497C0A271C7DD76300D4356E /* LikeDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeDescriptionView.swift; sourceTree = "<group>"; };
+		497C0A291C7DE13F00D4356E /* ProfileDescription.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProfileDescription.stencil; sourceTree = "<group>"; };
+		497F6C251C760A4D0007D40C /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCell.swift; path = ../NotificationCell.swift; sourceTree = "<group>"; };
+		497F6C271C7614FF0007D40C /* SKUserNameContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKUserNameContainerView.swift; sourceTree = "<group>"; };
+		498342A91C771CD500BB7F3B /* DescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		498342AB1C771FA100BB7F3B /* ProfileNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNotificationCell.swift; sourceTree = "<group>"; };
+		498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionView.swift; sourceTree = "<group>"; };
+		4991AE681C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRequestsViewCell.swift; sourceTree = "<group>"; };
+		49A0897A1C75B84B007BAA2E /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
+		49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableHeaderViewCell.swift; sourceTree = "<group>"; };
 		E5EED06EE39E818D5411F361 /* Pods-ShakerNotifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShakerNotifications.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShakerNotifications/Pods-ShakerNotifications.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,14 +134,22 @@
 		490B1C2C1C6B443D00266E87 /* ShakerNotifications */ = {
 			isa = PBXGroup;
 			children = (
+				493DEFBC1C787200006AD9B9 /* NotificationJSON.json */,
 				490B1C2D1C6B443D00266E87 /* AppDelegate.swift */,
 				490B1C2F1C6B443D00266E87 /* ViewController.swift */,
 				490B1C341C6B443D00266E87 /* Assets.xcassets */,
 				490B1C361C6B443D00266E87 /* LaunchScreen.storyboard */,
 				490B1C391C6B443D00266E87 /* Info.plist */,
 				490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */,
+				497F6C251C760A4D0007D40C /* NotificationCell.swift */,
+				498342AB1C771FA100BB7F3B /* ProfileNotificationCell.swift */,
+				498342A91C771CD500BB7F3B /* DescriptionView.swift */,
+				498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */,
+				497C0A271C7DD76300D4356E /* LikeDescriptionView.swift */,
+				4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */,
+				497F6C271C7614FF0007D40C /* SKUserNameContainerView.swift */,
 				493E6D761C7460EC00379904 /* BodyViewCell */,
-				493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */,
+				497C0A291C7DE13F00D4356E /* ProfileDescription.stencil */,
 			);
 			path = ShakerNotifications;
 			sourceTree = "<group>";
@@ -145,8 +175,11 @@
 		493E6D761C7460EC00379904 /* BodyViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */,
+				49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */,
+				4991AE681C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift */,
+				49A0897A1C75B84B007BAA2E /* ViewConstants.swift */,
 				490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */,
-				4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */,
 				494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */,
 			);
 			name = BodyViewCell;
@@ -276,6 +309,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497C0A2A1C7DE13F00D4356E /* ProfileDescription.stencil in Resources */,
+				493DEFBD1C787200006AD9B9 /* NotificationJSON.json in Resources */,
 				490B1C381C6B443D00266E87 /* LaunchScreen.storyboard in Resources */,
 				490B1C351C6B443D00266E87 /* Assets.xcassets in Resources */,
 			);
@@ -350,12 +385,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497F6C281C7614FF0007D40C /* SKUserNameContainerView.swift in Sources */,
 				490B1C301C6B443D00266E87 /* ViewController.swift in Sources */,
+				498342AE1C772F0900BB7F3B /* ProfileDescriptionView.swift in Sources */,
+				497F6C261C760A4D0007D40C /* NotificationCell.swift in Sources */,
+				4991AE691C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift in Sources */,
 				493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */,
 				4949799F1C7328AF0097E156 /* SKAvatarContainerView.swift in Sources */,
+				498342AC1C771FA100BB7F3B /* ProfileNotificationCell.swift in Sources */,
+				497C0A281C7DD76300D4356E /* LikeDescriptionView.swift in Sources */,
 				490B1C2E1C6B443D00266E87 /* AppDelegate.swift in Sources */,
 				490B1C5C1C6B503500266E87 /* ActivitesViewController.swift in Sources */,
+				49A0897D1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift in Sources */,
 				494979A11C7378F00097E156 /* SKDescriptionContainerView.swift in Sources */,
+				49A0897B1C75B84B007BAA2E /* ViewConstants.swift in Sources */,
+				498342AA1C771CD500BB7F3B /* DescriptionView.swift in Sources */,
 				490B1C5E1C6B516600266E87 /* NotificationBodyViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,7 +540,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Shaker.ShakerNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ShakerNotifications/ShakerNotifications-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -511,7 +555,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Shaker.ShakerNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ShakerNotifications/ShakerNotifications-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
