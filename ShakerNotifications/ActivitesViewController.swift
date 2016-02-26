@@ -10,27 +10,6 @@ import UIKit
 import SwiftyJSON
 
 class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    let users = [
-        [
-            "images": [
-                "avatar",
-                "avatar"
-            ]
-        ], [
-            "images": [
-                "avatar",
-                "avatar",
-                "avatar"
-            ]
-        ], [
-            "images": [
-                "avatar"
-            ]
-        ]
-        
-    ]
-    
     var json: JSON = JSON.null
     var tableView = UITableView()
     
@@ -46,7 +25,9 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.backgroundColor = UIColor.whiteColor()
         
         // register your class with cell identifier
-        self.tableView.registerClass(ProfileNotificationCell.self as AnyClass, forCellReuseIdentifier: "cell")
+        self.tableView.registerClass(ProfileNotificationCell.self as AnyClass, forCellReuseIdentifier: "profileCell")
+        self.tableView.registerClass(PublicationNotificationCell.self as AnyClass, forCellReuseIdentifier: "publicationCell")
+        self.tableView.registerClass(NotificationCell.self as AnyClass, forCellReuseIdentifier: "notificationCell")
         
         self.view.addSubview(tableView)
         self.tableView.reloadData()
@@ -57,14 +38,31 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cellData = json["body"].arrayValue[indexPath.row]
+        switch cellData["type"] {
+        case "profile" :
+            return tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath)
+//        case "like" :
+//            switch cellData["type"]["subtype"] {
+//                case "publication":
+//                return tableView.dequeueReusableCellWithIdentifier("publicationCell", forIndexPath: indexPath)
+//            default:
+//                return tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath)
+//            }
+        default:
+            return tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath)
+        }
         
-        return cell
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let cellData = json["body"].arrayValue[indexPath.row]
+        
         if let cell = cell as? ProfileNotificationCell {
+            cell.reload(cellData)
+//        } else if let cell = cell as? PublicationNotificationCell {
+//            cell.reload(cellData)
+        } else if let cell = cell as? NotificationCell {
             cell.reload(cellData)
         }
     }
@@ -72,7 +70,6 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     func getJSON() {
         if let file = NSBundle(forClass:AppDelegate.self).pathForResource("NotificationJSON", ofType: "json") {
             let data = NSData(contentsOfFile: file)!
-
             json = JSON(data:data)
         } else {
             json = JSON.null

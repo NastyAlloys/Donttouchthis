@@ -27,16 +27,10 @@ class DescriptionView: UIView {
     
     private func commonInit() {
         self.clipsToBounds = true
-        
     }
     
     // MARK: - UIView update -
-    func reset() { }
+    func reset() {}
     
-    func reload(json: JSON) {
-    
-    
-    
-    }
-    
+    func reload(json: JSON) {}
 }

@@ -1,19 +1,18 @@
 //
-//  BodyDescriptionView.swift
+//  InterestDescriptionView.swift
 //  ShakerNotifications
 //
-//  Created by Andrew on 19.02.16.
+//  Created by Andrew on 25.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import TTTAttributedLabel
-import Cartography
 import SwiftyJSON
-import Stencil
+import Cartography
 
-class ProfileDescriptionView: DescriptionView {
+class ShakeDescriptionView: DescriptionView {
+    private(set) var descriptionButton: UIButton!
     private(set) var descriptionLabel: UILabel!
     
     override init(frame: CGRect) {
@@ -31,6 +30,7 @@ class ProfileDescriptionView: DescriptionView {
     override func reset() {
         super.reset()
         
+        self.descriptionButton.setImage(nil, forState: .Normal)
         self.descriptionLabel.text = ""
     }
     
@@ -58,7 +58,7 @@ class ProfileDescriptionView: DescriptionView {
         // дозаписываем в строку глагол
         let pluralizedVerbString = pluralize(userNamesCount, form_for_1: "подписался(ась)", form_for_2: "подписались", form_for_5: "подписались")
         profileString += " " + pluralizedVerbString + " на "
-
+        
         // дозаписываем в строку пользователей, на которых подписались
         let subUserNames = json["body"]["sub_user_names"].arrayObject as! [String]
         let subUserNamesCount = subUserNames.count
@@ -74,32 +74,49 @@ class ProfileDescriptionView: DescriptionView {
         default :
             profileString += "\(subUserNames[0])"
         }
-
+        
+        self.descriptionLabel.textColor = UIColor.whiteColor()
+        self.descriptionLabel.font = UIFont(name: self.descriptionLabel.font.fontName, size: 15)
         self.descriptionLabel.text = profileString
     }
     
     private func commonInit() {
+        self.setUpDescriptionButton()
         self.setUpDescriptionLabel()
         self.reset()
         self.addSubview(self.descriptionLabel)
+        self.addSubview(self.descriptionButton)
         
-        constrain(descriptionLabel) { descriptionLabel in
-            guard let superview = descriptionLabel.superview else { return }
+        constrain(descriptionButton, descriptionLabel) { descriptionButton, descriptionLabel in
+            guard let superview = descriptionButton.superview else { return }
             
-            descriptionLabel.top == superview.top
-            descriptionLabel.bottom == superview.bottom
-            descriptionLabel.left == superview.left
-            descriptionLabel.right == superview.right
+            descriptionButton.width == 35
+            descriptionButton.height == 35
+            descriptionButton.right == superview.right - 15
+            descriptionButton.top == superview.top + 10
+            
+            descriptionLabel.top == superview.top + 10
+            descriptionLabel.bottom == superview.bottom - 10
+            descriptionLabel.left == superview.left + 10
+            descriptionLabel.right == descriptionButton.left - 10
+            descriptionLabel.height == 100
         }
+    }
+    
+    private func setUpDescriptionButton() {
+        self.descriptionButton = UIButton()
+        self.descriptionButton.backgroundColor = UIColor.blackColor()
+        self.descriptionButton.setTitle("SHIT", forState: .Normal)
+        self.descriptionButton.layer.shouldRasterize = true
+        self.descriptionButton.layer.rasterizationScale = UIScreen.mainScreen().scale
     }
     
     private func setUpDescriptionLabel() {
         self.descriptionLabel = UILabel()
-        self.descriptionLabel.backgroundColor = UIColor.whiteColor()
-        self.descriptionLabel.clipsToBounds = true
+        self.descriptionLabel.backgroundColor = UIColor.blueColor()
+        self.descriptionLabel.clipsToBounds = false
         self.descriptionLabel.textColor = UIColor.lightGrayColor()
         self.descriptionLabel.numberOfLines = 0
         self.descriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
     }
-    
 }

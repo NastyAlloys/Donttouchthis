@@ -125,7 +125,7 @@ class SKAvatarContainerView: UIView {
     private func configureImageView() -> UIImageView {
         let imageView = UIImageView()
         
-        //        imageView.image = defaultImage
+//        imageView.image = defaultImage
         imageView.backgroundColor = UIColor.lightGrayColor()
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
         imageView.layer.shouldRasterize = true
@@ -140,6 +140,9 @@ class SKAvatarContainerView: UIView {
     
     // MARK: - UIView update -
     func reset() {
+        
+        self.avatarButton.setImage(defaultImage, forState: .Normal)
+        /*
         let subviews = self.subviews
         
         for view in subviews {
@@ -150,11 +153,10 @@ class SKAvatarContainerView: UIView {
                 button.setImage(defaultImage, forState: .Normal)
             }
         }
+        */
     }
     
     func reload(cellData: JSON) {
-//        guard let images = cellData["images"] else { return }
-        
         guard let user_avatar = cellData["user_avatar"].string else { return }
         
         let imageUrl = NSURL(string: user_avatar)
