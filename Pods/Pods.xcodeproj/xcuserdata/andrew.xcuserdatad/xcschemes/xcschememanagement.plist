@@ -9,22 +9,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AlamofireObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Cartography.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PathKit.xcscheme</key>
+		<key>Gloss.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-ShakerNotifications.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Stencil.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,17 +47,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2289963CF500C507130BB49161E211A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6A777B93B0487E385E7E8ACA6CD1C359</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>96F3148B2A751586915800EC323DC232</key>
+		<key>7DC06C1699640E6E13509304ADFDF0CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A22914A3458F63A6D76F43905A2CA4A6</key>
+		<key>B07B012AE17952EE777271E277F90284</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,17 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E1AAA5F0DDD54BA3818FCB8ED9E48A44</key>
+		<key>C5CBCAA97E951CC882334464FBDF983D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EB187E9766F21BE211F7A6D0F848CF7C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F8DBBC6BB5AD1EBD4E9C618B36F18963</key>
+		<key>FBD082A0D35F7917EAB9DD9D3CCA9976</key>
 		<dict>
 			<key>primary</key>
 			<true/>

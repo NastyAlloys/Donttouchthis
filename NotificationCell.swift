@@ -15,7 +15,6 @@ import SwiftyJSON
 class NotificationCell: UITableViewCell {
     // MARK: - Properties -
     var avatarView: SKAvatarContainerView!
-    var nameView: SKUserNameContainerView!
     var footerView: SKFooterContainerView!
     private(set) var descriptionView: DescriptionView!
     
@@ -53,11 +52,11 @@ class NotificationCell: UITableViewCell {
         self.reset()
     }
     
-    func reload(cellData: JSON) {
+    func reload(data: SKBaseActivities) {
         self.reset()
-        self.avatarView.reload(cellData)
-        self.descriptionView.reload(cellData)
-        self.footerView.reload(cellData)
+        self.avatarView.reload(data)
+        self.footerView.reload(data)
+        self.descriptionView.reload(data)
     }
     
     /*
@@ -82,11 +81,12 @@ class NotificationCell: UITableViewCell {
             avatarView.left == superview.left + 10
             avatarView.top == superview.top + 10
             avatarView.bottom == superview.bottom
-            descriptionView.bottom == footerView.top - 10
+            
+            descriptionView.top == superview.top + 10
+            descriptionView.bottom <= footerView.top - 10
             descriptionView.left == avatarView.right + 10
             descriptionView.right == superview.right - 10 ~ 751
             
-//            footerView.height == 10
             footerView.bottom == superview.bottom - 10
             footerView.left == avatarView.right + 10
             footerView.right == superview.right - 10 ~ 751

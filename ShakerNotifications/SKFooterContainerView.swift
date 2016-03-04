@@ -59,17 +59,15 @@ class SKFooterContainerView: UIView {
         
     }
     
-    // TODO показывать нормальную дату
-    func reload(cellData: JSON) {
-        guard let timestamp = cellData["timestamp"].double else { return }
+    func reload(data: SKBaseActivities) {
         
-        let formatter = NSDateComponentsFormatter()
-        formatter.unitsStyle = .Full
-        formatter.allowedUnits = NSCalendarUnit.Day
-        let string = formatter.stringFromTimeInterval(1362873600)
-        print(string)
+        let timestamp = data.timestamp
         
-        self.timeLabel.text = String(timestamp)
+        let currentDate = NSDate()
+        let serverDate = NSDate(timeIntervalSince1970: timestamp)
+        let diffDate = NSDate.feedIntervalBetweenDates(serverDate, nowDate: currentDate)
+        
+        self.timeLabel.text = diffDate!
     }
     
 }

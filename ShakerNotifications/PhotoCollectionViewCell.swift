@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import Cartography
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties -
@@ -54,6 +55,22 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     private func setUpViews() {
         self.useCornerRadius = true
         
+        self.setUpPhotoImageView()
+        self.addSubview(self.photoImageView)
+        
+        constrain(self.photoImageView) { photoImageView in
+//            guard let superview = photoImageView.superview else { return }
+//            photoImageView.top == superview.top
+//            photoImageView.bottom == superview.bottom
+//            photoImageView.right == superview.right
+//            photoImageView.left == superview.left
+            photoImageView.height == 42
+            photoImageView.width == 42
+        }
+    }
+    
+    func setUpPhotoImageView() {
+        self.photoImageView = UIImageView()
         self.photoImageView.backgroundColor = UIColor.whiteColor()
         self.photoImageView.image = nil
         self.photoImageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -88,29 +105,17 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         self.reloadImage(image)
     }
     
-    func reload(collection: [String]) {
+    func reload(imageUrl: String) {
         self.layoutIfNeeded()
         
         self.timestamp = NSDate().timeIntervalSince1970
         
         let timestamp: NSTimeInterval = self.timestamp
-        var image = UIImage()
-        
         if self.timestamp != timestamp {
             return
         }
         
-//        for imageString in collection {
-//            
-//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                image = image.
-//                self.reloadImage()
-//            })
-//        }
-        
-        
-        
+        self.photoImageView.imageFromUrl(imageUrl)
         
     }
-    
 }

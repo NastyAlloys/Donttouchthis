@@ -17,6 +17,7 @@ class SKAvatarContainerView: UIView {
     let defaultImage = UIImage(named: "avatar.placeholder.png")
     var avatarButton: UIButton!
     weak var currentAvatarView: UIView?
+    var imageTimestamp: NSTimeInterval = 0
     
     let numberOfSubContainers = 2
     
@@ -116,7 +117,7 @@ class SKAvatarContainerView: UIView {
         iconImageView.layer.masksToBounds = false
         iconImageView.clipsToBounds = true
         iconImageView.hidden = false
-        iconImageView.image = UIImage(named: "icon-notify-like")
+        iconImageView.image = nil
         iconImageView.tag = 10
         
         return iconImageView
@@ -156,16 +157,31 @@ class SKAvatarContainerView: UIView {
         */
     }
     
-    func reload(cellData: JSON) {
-        guard let user_avatar = cellData["user_avatar"].string else { return }
+    func reload(data: SKBaseActivities) {
+        guard let user_avatar = data.user_avatar?.url else { return }
         
-        let imageUrl = NSURL(string: user_avatar)
-        let imageData = NSData(contentsOfURL: imageUrl!)
-        let image: UIImage = UIImage(data: imageData!)!
+        switch data.activityType {
+        case .Profile:
+            iconImageView.image = UIImage(named: "icon-notify-user")
+        case .Like:
+            iconImageView.image = UIImage(named: "icon-notify-like")
+        default:
+            iconImageView.image = nil
+        }
         
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.avatarButton.setImage(image, forState: .Normal)
-        })
+        self.imageTimestamp = NSDate().timeIntervalSince1970
+        let imageTimestamp = self.imageTimestamp
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+            let imageUrl = NSURL(string: user_avatar)
+            let imageData = NSData(contentsOfURL: imageUrl!)
+            let image: UIImage = UIImage(data: imageData!)!
+            
+            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                guard self?.imageTimestamp == imageTimestamp else { return }
+                self?.avatarButton.setImage(image, forState: .Normal)
+            }
+        }
 
         /*
         let subviews = self.subviews

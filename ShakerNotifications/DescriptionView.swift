@@ -33,4 +33,6 @@ class DescriptionView: UIView {
     func reset() {}
     
     func reload(json: JSON) {}
+    
+    func reload(data: SKBaseActivities) {}
 }

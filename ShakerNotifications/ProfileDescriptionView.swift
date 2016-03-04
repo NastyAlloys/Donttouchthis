@@ -14,7 +14,8 @@ import SwiftyJSON
 import Stencil
 
 class ProfileDescriptionView: DescriptionView {
-    private(set) var descriptionLabel: UILabel!
+    private(set) var descriptionLabel: TTTAttributedLabel!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,6 +33,12 @@ class ProfileDescriptionView: DescriptionView {
         super.reset()
         
         self.descriptionLabel.text = ""
+    }
+    
+    override func reload(data: SKBaseActivities) {
+        super.reload(data)
+        
+        self.descriptionLabel.setText(data.activityDescription.value)
     }
     
     override func reload(json: JSON) {
@@ -94,7 +101,8 @@ class ProfileDescriptionView: DescriptionView {
     }
     
     private func setUpDescriptionLabel() {
-        self.descriptionLabel = UILabel()
+        self.descriptionLabel = TTTAttributedLabel(frame: .zero)
+        self.descriptionLabel.delegate = self
         self.descriptionLabel.backgroundColor = UIColor.whiteColor()
         self.descriptionLabel.clipsToBounds = true
         self.descriptionLabel.textColor = UIColor.lightGrayColor()
@@ -102,4 +110,12 @@ class ProfileDescriptionView: DescriptionView {
         self.descriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
     }
     
+}
+
+extension ProfileDescriptionView: TTTAttributedLabelDelegate {
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        guard let url = url else { return }
+        UIApplication.sharedApplication().openURL(url)
+    }
 }

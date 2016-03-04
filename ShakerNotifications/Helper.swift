@@ -8,6 +8,8 @@
 
 import Foundation
 
+//MARK: - STRING -
+
 private var vowels: [String] {
     get {
         return ["а","е","ё","и","о","у","ы","э","ю","я"]
@@ -39,6 +41,43 @@ func pluralize(var number: Int, form_for_1: String, form_for_2: String, form_for
     return form_for_5
 }
 
+// MARK: - DATE -
+
 var Timestamp: NSTimeInterval {
     return NSDate().timeIntervalSince1970 * 1000
+}
+
+var monthString: [Int: String] = [
+    1: "янв",
+    2: "фев",
+    3: "март",
+    4: "апр",
+    5: "май",
+    6: "июнь",
+    7: "июль",
+    8: "авг",
+    9: "сент",
+    10: "окт",
+    11: "нояб",
+    12: "дек"
+]
+
+func timestampToDateString(timestamp: NSTimeInterval) -> String {
+    
+    let date = NSDate(timeIntervalSince1970: timestamp)
+    let calendar = NSCalendar.currentCalendar()
+    let components = calendar.components([.Day , .Month , .Year], fromDate: date)
+    
+    var dateString = ""
+    
+    let day = components.day
+    dateString += String(day) + " "
+    
+    let month = components.month
+    dateString += monthString[month]! + " "
+    
+    let year = components.year
+    dateString += String(year)
+    
+    return dateString
 }
