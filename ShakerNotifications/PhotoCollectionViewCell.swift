@@ -6,9 +6,7 @@
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import SwiftyJSON
 import Cartography
 
 class PhotoCollectionViewCell: UICollectionViewCell {

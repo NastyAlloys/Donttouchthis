@@ -1,15 +1,15 @@
 //
-//  QuoteDescriptionView.swift
+//  LikeDescriptionView.swift
 //  ShakerNotifications
 //
-//  Created by Andrew on 25.02.16.
+//  Created by Andrew on 04.03.16.
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
 import UIKit
 import Cartography
 
-class QuoteDescriptionView: DescriptionView {
+class LikeDescriptionView: DescriptionView {
     private(set) var descriptionButton: UIButton!
     
     override init(frame: CGRect) {
@@ -42,5 +42,5 @@ class QuoteDescriptionView: DescriptionView {
         self.descriptionButton.setTitle("SHIT", forState: .Normal)
         self.descriptionButton.layer.shouldRasterize = true
         self.descriptionButton.layer.rasterizationScale = UIScreen.mainScreen().scale
-    }    
+    }
 }

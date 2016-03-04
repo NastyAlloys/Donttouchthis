@@ -13,7 +13,6 @@ import Cartography
 class PhotoPublicationDescriptionView: DescriptionView, UICollectionViewDelegateFlowLayout {
     
     private(set) var descriptionButton: UIButton!
-    private(set) var descriptionLabel: UILabel!
     private(set) var publicationCollectionView: UICollectionView!
     var collection = [String]()
     
@@ -29,7 +28,7 @@ class PhotoPublicationDescriptionView: DescriptionView, UICollectionViewDelegate
         self.commonInit()
     }
     
-    private func commonInit() {
+    override func commonInit() {
         
         self.setUpPublicationCollectionView()
         self.reset()
@@ -60,34 +59,12 @@ class PhotoPublicationDescriptionView: DescriptionView, UICollectionViewDelegate
         self.publicationCollectionView.dataSource = self
     }
     
-    private func setUpDescriptionLabel() {
-        self.descriptionLabel = UILabel()
-        self.descriptionLabel.backgroundColor = UIColor.blueColor()
-        self.descriptionLabel.clipsToBounds = false
-        self.descriptionLabel.textColor = UIColor.lightGrayColor()
-        self.descriptionLabel.numberOfLines = 0
-        self.descriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-    }
-    
     override func reset() {
         super.reset()
     }
     
-    override func reload(json: JSON) {
-        super.reload(json)
-        
-        // получаем картинки публикаций
-        self.collection = [String]()
-        self.collection = json["body"]["photos"].arrayObject as! [String]
-        
-        self.publicationCollectionView.reloadData()
-        
-        var publicationString = ""
-        let publicationImagesCount = json["body"]["count"].int
-        let pluralizedPublicationString = pluralize(publicationImagesCount!, form_for_1: "публикация", form_for_2: "публикации", form_for_5: "публикаций")
-        let user_name = json["user_names"].arrayObject as! [String]
-        
-        publicationString += "\(user_name[0]) нравится \(publicationImagesCount) \(pluralizedPublicationString)"
+    override func reload(data: SKBaseActivities) {
+        super.reload(data)
     }
     
     class func getCellHeightForCollectionCount(count: Int, andOrientation orientation: UIDeviceOrientation) -> CGFloat {

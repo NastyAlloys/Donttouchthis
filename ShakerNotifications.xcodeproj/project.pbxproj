@@ -46,6 +46,8 @@
 		499DB32A1C80586200A4F511 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DB3291C80586200A4F511 /* PhotoCollectionViewCell.swift */; };
 		49A0897B1C75B84B007BAA2E /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0897A1C75B84B007BAA2E /* ViewConstants.swift */; };
 		49A0897D1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */; };
+		49F51F1A1C898ADA004A1628 /* PhotoCollectionDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F51F191C898ADA004A1628 /* PhotoCollectionDescriptionView.swift */; };
+		49F51F1C1C899F27004A1628 /* PhotoTextDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F51F1B1C899F27004A1628 /* PhotoTextDescriptionView.swift */; };
 		AB64788175A1AC6E992CFCEC /* Pods_ShakerNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 331DCD6C38BAEC6D3FAFF1C2 /* Pods_ShakerNotifications.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +116,8 @@
 		499DB3291C80586200A4F511 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		49A0897A1C75B84B007BAA2E /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableHeaderViewCell.swift; sourceTree = "<group>"; };
+		49F51F191C898ADA004A1628 /* PhotoCollectionDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionDescriptionView.swift; sourceTree = "<group>"; };
+		49F51F1B1C899F27004A1628 /* PhotoTextDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTextDescriptionView.swift; sourceTree = "<group>"; };
 		E5EED06EE39E818D5411F361 /* Pods-ShakerNotifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShakerNotifications.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShakerNotifications/Pods-ShakerNotifications.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +234,8 @@
 				495314251C7F586C00AF5157 /* SKFooterContainerView.swift */,
 				498342A91C771CD500BB7F3B /* DescriptionView.swift */,
 				498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */,
+				49F51F191C898ADA004A1628 /* PhotoCollectionDescriptionView.swift */,
+				49F51F1B1C899F27004A1628 /* PhotoTextDescriptionView.swift */,
 				495314121C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift */,
 				495314141C7F45CD00AF5157 /* QuoteDescriptionView.swift */,
 				495314161C7F45E000AF5157 /* InterestDescriptionView.swift */,
@@ -478,6 +484,7 @@
 				498342AE1C772F0900BB7F3B /* ProfileDescriptionView.swift in Sources */,
 				497F6C261C760A4D0007D40C /* NotificationCell.swift in Sources */,
 				4991AE691C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift in Sources */,
+				49F51F1A1C898ADA004A1628 /* PhotoCollectionDescriptionView.swift in Sources */,
 				494F88AB1C874D8F00969602 /* SKPublicationActivities.swift in Sources */,
 				493A96501C85F68900C4AD37 /* ActivitiesViewModel.swift in Sources */,
 				493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */,
@@ -494,6 +501,7 @@
 				495314111C7F06EC00AF5157 /* Helper.swift in Sources */,
 				49A0897D1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift in Sources */,
 				495314131C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift in Sources */,
+				49F51F1C1C899F27004A1628 /* PhotoTextDescriptionView.swift in Sources */,
 				494979A11C7378F00097E156 /* SKDescriptionContainerView.swift in Sources */,
 				49A0897B1C75B84B007BAA2E /* ViewConstants.swift in Sources */,
 				495314261C7F586C00AF5157 /* SKFooterContainerView.swift in Sources */,

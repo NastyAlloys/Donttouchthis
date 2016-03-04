@@ -6,14 +6,11 @@
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import SwiftyJSON
 import Cartography
 
 class InterestDescriptionView: DescriptionView {
     private(set) var descriptionButton: UIButton!
-    private(set) var descriptionLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,12 +28,13 @@ class InterestDescriptionView: DescriptionView {
         super.reset()
     }
     
-    override func reload(json: JSON) {
-        super.reload(json)
-        
+    override func reload(data: SKBaseActivities) {
+        super.reload(data)
     }
     
-    private func commonInit() {    }
+    override func commonInit() {
+        super.commonInit()
+    }
     
     private func setUpDescriptionButton() {
         self.descriptionButton = UIButton()
@@ -44,15 +42,5 @@ class InterestDescriptionView: DescriptionView {
         self.descriptionButton.setTitle("SHIT", forState: .Normal)
         self.descriptionButton.layer.shouldRasterize = true
         self.descriptionButton.layer.rasterizationScale = UIScreen.mainScreen().scale
-    }
-    
-    private func setUpDescriptionLabel() {
-        self.descriptionLabel = UILabel()
-        self.descriptionLabel.backgroundColor = UIColor.blueColor()
-        self.descriptionLabel.clipsToBounds = false
-        self.descriptionLabel.textColor = UIColor.lightGrayColor()
-        self.descriptionLabel.numberOfLines = 0
-        self.descriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-    }
-    
+    }    
 }

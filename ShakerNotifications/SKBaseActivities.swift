@@ -167,7 +167,8 @@ class SKBaseActivities {
                 userAttributedString.appendAttributedString(NSAttributedString(string: value,
                     attributes: [
                         //NSURL(string: "user_by_id://\(userId)")
-                        NSLinkAttributeName : NSURL(string: "https://google.com/\(userId)")!
+                        NSLinkAttributeName : NSURL(string: "https://google.com/\(userId)")!,
+                        NSUnderlineStyleAttributeName : NSUnderlineStyle.StyleNone.rawValue
                     ]))
             }
             
@@ -175,7 +176,8 @@ class SKBaseActivities {
             let additionalUsers = userOthers
             if additionalUsers > 0 {
                 let resultString = " и ещё \(additionalUsers)"
-                userAttributedString.appendAttributedString(NSAttributedString(string: resultString))
+                let coloredString = self.setAttributedStringColor(resultString, color: UIColor.darkGrayColor())
+                userAttributedString.appendAttributedString(coloredString)
             }
         }
         
@@ -184,5 +186,14 @@ class SKBaseActivities {
         
         return attributedText
         
+    }
+    
+    /*
+        Меняет цвет NSAttributedString на цвет, переданный в параметре
+    */
+    func setAttributedStringColor(string: String, color:UIColor) -> NSAttributedString {
+        return NSAttributedString(string: string, attributes: [
+            NSForegroundColorAttributeName:color
+            ])
     }
 }
