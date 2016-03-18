@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A93D6B6619482148F4ADD00FFC5BF614A226FEF1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A93D6B6619482148F4ADD00FFC5BF614A226FEF1" : 0,
+    "F94B7DF2DAF4F3BA8ADDB837E09B5D8317A625CE" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3EE9E3F1-608F-4E7A-8C2A-A53B2898A712",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A93D6B6619482148F4ADD00FFC5BF614A226FEF1" : "ShakerNotifications\/",
+    "F94B7DF2DAF4F3BA8ADDB837E09B5D8317A625CE" : "shake_ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ShakerNotifications",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ShakerNotifications.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:NastyAlloys\/Donttouchthis.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A93D6B6619482148F4ADD00FFC5BF614A226FEF1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dekakisalove\/shake_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F94B7DF2DAF4F3BA8ADDB837E09B5D8317A625CE"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 //
 //  SKImageContainerLayer.swift
-//  ShakerNotifications
+//  Shaker2.0
 //
-//  Created by Andrew on 03.03.16.
-//  Copyright © 2016 Andrey. All rights reserved.
+//  Created by Sergey Minakov on 03.12.15.
+//  Copyright © 2015 ShakerApp. All rights reserved.
 //
 
 import UIKit
@@ -30,20 +30,22 @@ class SKImageContainerLayer: CALayer {
         }
     }
     
+    /*
+    П
+    */
     func displayImages(count count: Int, clear: Bool, layerSetupBlock: ((index: Int, layer: CALayer) -> ()) ) {
         guard let sublayers = self.sublayers else { return }
-        
         for (index, avatarLayer) in sublayers.enumerate() where
             avatarLayer.frame.maxX <= self.frame.width {
+//                print("avatar: \(avatarLayer.frame.maxX)")
+//                print("frame: \(self.frame.width)")
                 if clear {
                     avatarLayer.contents = nil
                 }
-                
                 if index < count {
                     avatarLayer.hidden = false
                     layerSetupBlock(index: index, layer: avatarLayer)
-                }
-                else if !avatarLayer.hidden {
+                } else if !avatarLayer.hidden {
                     avatarLayer.hidden = true
                 }
         }
@@ -80,6 +82,59 @@ class SKImageContainerLayer: CALayer {
             avatarLayer.drawsAsynchronously = true
             
             self.addSublayer(avatarLayer)
+        }
+    }
+    
+    func setupLayerWithLines(size size: CGSize, offset: CGFloat, maxCount: Int) {
+        
+        self.masksToBounds = true
+        self.backgroundColor = UIColor.clearColor().CGColor
+        if let sublayers = self.sublayers {
+            for layer in sublayers {
+                layer.removeFromSuperlayer()
+            }
+        }
+        
+        let width: CGFloat = size.width + offset
+        let cornerRadius: CGFloat = min(size.height, size.width) / 2
+        
+        var currentWidth: CGFloat = 0
+
+        var axisY: CGFloat = self.frame.origin.y
+        var axisX: CGFloat = 0
+        var j = 0
+        
+        for _ in 0..<maxCount {
+            if currentWidth + width + 15 >= self.bounds.width {
+                currentWidth = 0
+                axisX = 0
+                axisY += size.height + offset
+                j = 0
+            }
+            
+            axisX = width * CGFloat(j)
+            
+            j += 1
+            
+//            print("mainLayerWidth: \(mainLayerWidth)")
+//            print("currentwidth: \(currentWidth)")
+//            print("axisY: \(axisY)")
+            
+            let avatarLayer = CALayer()
+            avatarLayer.backgroundColor = UIColor.groupTableViewBackgroundColor().CGColor
+            avatarLayer.contentsGravity = kCAGravityResizeAspectFill
+            avatarLayer.frame = CGRect(x: axisX, y: axisY, width: size.width, height: size.height)
+            avatarLayer.cornerRadius = cornerRadius
+            avatarLayer.masksToBounds = true
+            avatarLayer.hidden = true
+            avatarLayer.drawsAsynchronously = true
+            
+//            print("avatarLayerFrame: \(avatarLayer.frame)")
+            
+            self.addSublayer(avatarLayer)
+            
+            currentWidth += avatarLayer.frame.width
+            
         }
     }
 }

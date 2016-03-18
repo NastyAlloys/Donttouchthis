@@ -93,4 +93,11 @@ class NotificationCell: UITableViewCell {
             
         }
     }
+    
+    func setupSize() -> CGFloat {
+        
+        let height = self.footerView.bounds.height + self.descriptionView.bounds.height + 40
+        return height
+        
+    }
 }

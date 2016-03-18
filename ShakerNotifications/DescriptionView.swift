@@ -13,6 +13,7 @@ import TTTAttributedLabel
 class DescriptionView: UIView {
     // MARK: Properties
     private(set) var descriptionLabel: TTTAttributedLabel!
+    var descriptionLabelHeight: NSLayoutConstraint?
     
     // MARK: - Initialization -
     override init(frame: CGRect) {
@@ -32,7 +33,7 @@ class DescriptionView: UIView {
         self.setUpDescriptionLabel()
         self.reset()
         self.addSubview(self.descriptionLabel)
-        
+        /*
         constrain(descriptionLabel) { descriptionLabel in
             guard let superview = descriptionLabel.superview else { return }
             
@@ -40,7 +41,7 @@ class DescriptionView: UIView {
             descriptionLabel.bottom == superview.bottom
             descriptionLabel.left == superview.left
             descriptionLabel.right == superview.right
-        }
+        }*/
     }
     
     // MARK: - UIView update -

@@ -15,17 +15,10 @@
 		490B1C4E1C6B443D00266E87 /* ShakerNotificationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C4D1C6B443D00266E87 /* ShakerNotificationsUITests.swift */; };
 		490B1C5C1C6B503500266E87 /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */; };
 		490B1C5E1C6B516600266E87 /* NotificationBodyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */; };
-		493A96501C85F68900C4AD37 /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493A964F1C85F68900C4AD37 /* ActivitiesViewModel.swift */; };
 		493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */; };
 		4949799F1C7328AF0097E156 /* SKAvatarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */; };
 		494979A11C7378F00097E156 /* SKDescriptionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */; };
-		494F889F1C8739A300969602 /* SKBaseActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F889E1C8739A300969602 /* SKBaseActivities.swift */; };
 		494F88A11C873A7600969602 /* Lazy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F88A01C873A7600969602 /* Lazy.swift */; };
-		494F88A31C874D3F00969602 /* SKProfileActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F88A21C874D3F00969602 /* SKProfileActivities.swift */; };
-		494F88A51C874D4E00969602 /* SKShakeActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F88A41C874D4E00969602 /* SKShakeActivities.swift */; };
-		494F88A71C874D5E00969602 /* SKInterestActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F88A61C874D5E00969602 /* SKInterestActivities.swift */; };
-		494F88A91C874D7A00969602 /* SKQuoteActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F88A81C874D7A00969602 /* SKQuoteActivities.swift */; };
-		494F88AB1C874D8F00969602 /* SKPublicationActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F88AA1C874D8F00969602 /* SKPublicationActivities.swift */; };
 		495314111C7F06EC00AF5157 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495314101C7F06EC00AF5157 /* Helper.swift */; };
 		495314131C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495314121C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift */; };
 		495314151C7F45CD00AF5157 /* QuoteDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495314141C7F45CD00AF5157 /* QuoteDescriptionView.swift */; };
@@ -47,7 +40,12 @@
 		49A0897B1C75B84B007BAA2E /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0897A1C75B84B007BAA2E /* ViewConstants.swift */; };
 		49A0897D1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */; };
 		49F51F1A1C898ADA004A1628 /* PhotoCollectionDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F51F191C898ADA004A1628 /* PhotoCollectionDescriptionView.swift */; };
-		49F51F1C1C899F27004A1628 /* PhotoTextDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F51F1B1C899F27004A1628 /* PhotoTextDescriptionView.swift */; };
+		55982C931C9C0B7B00147130 /* SKBaseActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55982C8D1C9C0B7B00147130 /* SKBaseActivities.swift */; };
+		55982C941C9C0B7B00147130 /* SKInterestActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55982C8E1C9C0B7B00147130 /* SKInterestActivities.swift */; };
+		55982C951C9C0B7B00147130 /* SKProfileActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55982C8F1C9C0B7B00147130 /* SKProfileActivities.swift */; };
+		55982C961C9C0B7B00147130 /* SKPublicationActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55982C901C9C0B7B00147130 /* SKPublicationActivities.swift */; };
+		55982C971C9C0B7B00147130 /* SKQuoteActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55982C911C9C0B7B00147130 /* SKQuoteActivities.swift */; };
+		55982C981C9C0B7B00147130 /* SKShakeActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55982C921C9C0B7B00147130 /* SKShakeActivities.swift */; };
 		AB64788175A1AC6E992CFCEC /* Pods_ShakerNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 331DCD6C38BAEC6D3FAFF1C2 /* Pods_ShakerNotifications.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,17 +83,10 @@
 		490B1C4F1C6B443D00266E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitesViewController.swift; sourceTree = "<group>"; };
 		490B1C5D1C6B516600266E87 /* NotificationBodyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBodyViewCell.swift; sourceTree = "<group>"; };
-		493A964F1C85F68900C4AD37 /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
 		493E6D841C749C7B00379904 /* NotificationFooterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFooterViewCell.swift; sourceTree = "<group>"; };
 		4949799E1C7328AF0097E156 /* SKAvatarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAvatarContainerView.swift; sourceTree = "<group>"; };
 		494979A01C7378F00097E156 /* SKDescriptionContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKDescriptionContainerView.swift; sourceTree = "<group>"; };
-		494F889E1C8739A300969602 /* SKBaseActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKBaseActivities.swift; sourceTree = "<group>"; };
 		494F88A01C873A7600969602 /* Lazy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lazy.swift; sourceTree = "<group>"; };
-		494F88A21C874D3F00969602 /* SKProfileActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKProfileActivities.swift; sourceTree = "<group>"; };
-		494F88A41C874D4E00969602 /* SKShakeActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKShakeActivities.swift; sourceTree = "<group>"; };
-		494F88A61C874D5E00969602 /* SKInterestActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKInterestActivities.swift; sourceTree = "<group>"; };
-		494F88A81C874D7A00969602 /* SKQuoteActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKQuoteActivities.swift; sourceTree = "<group>"; };
-		494F88AA1C874D8F00969602 /* SKPublicationActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPublicationActivities.swift; sourceTree = "<group>"; };
 		495314101C7F06EC00AF5157 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		495314121C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPublicationDescriptionView.swift; sourceTree = "<group>"; };
 		495314141C7F45CD00AF5157 /* QuoteDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuoteDescriptionView.swift; sourceTree = "<group>"; };
@@ -117,7 +108,12 @@
 		49A0897A1C75B84B007BAA2E /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		49A0897C1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableHeaderViewCell.swift; sourceTree = "<group>"; };
 		49F51F191C898ADA004A1628 /* PhotoCollectionDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionDescriptionView.swift; sourceTree = "<group>"; };
-		49F51F1B1C899F27004A1628 /* PhotoTextDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTextDescriptionView.swift; sourceTree = "<group>"; };
+		55982C8D1C9C0B7B00147130 /* SKBaseActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKBaseActivities.swift; sourceTree = "<group>"; };
+		55982C8E1C9C0B7B00147130 /* SKInterestActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKInterestActivities.swift; sourceTree = "<group>"; };
+		55982C8F1C9C0B7B00147130 /* SKProfileActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKProfileActivities.swift; sourceTree = "<group>"; };
+		55982C901C9C0B7B00147130 /* SKPublicationActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPublicationActivities.swift; sourceTree = "<group>"; };
+		55982C911C9C0B7B00147130 /* SKQuoteActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKQuoteActivities.swift; sourceTree = "<group>"; };
+		55982C921C9C0B7B00147130 /* SKShakeActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKShakeActivities.swift; sourceTree = "<group>"; };
 		E5EED06EE39E818D5411F361 /* Pods-ShakerNotifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShakerNotifications.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShakerNotifications/Pods-ShakerNotifications.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,12 +169,11 @@
 			isa = PBXGroup;
 			children = (
 				490B1C5B1C6B503500266E87 /* ActivitesViewController.swift */,
+				55982C8C1C9C0B7B00147130 /* NotificationsDataProvider */,
 				4953141E1C7F467300AF5157 /* NotificationCell */,
 				4953141F1C7F468200AF5157 /* NotificationView */,
-				497F352F1C886E3600E3911A /* NotificationDataProvider */,
 				493E6D761C7460EC00379904 /* BodyViewCell */,
 				495314201C7F46B600AF5157 /* Support */,
-				493A964F1C85F68900C4AD37 /* ActivitiesViewModel.swift */,
 			);
 			path = ShakerNotifications;
 			sourceTree = "<group>";
@@ -235,7 +230,6 @@
 				498342A91C771CD500BB7F3B /* DescriptionView.swift */,
 				498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */,
 				49F51F191C898ADA004A1628 /* PhotoCollectionDescriptionView.swift */,
-				49F51F1B1C899F27004A1628 /* PhotoTextDescriptionView.swift */,
 				495314121C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift */,
 				495314141C7F45CD00AF5157 /* QuoteDescriptionView.swift */,
 				495314161C7F45E000AF5157 /* InterestDescriptionView.swift */,
@@ -261,17 +255,17 @@
 			name = Support;
 			sourceTree = "<group>";
 		};
-		497F352F1C886E3600E3911A /* NotificationDataProvider */ = {
+		55982C8C1C9C0B7B00147130 /* NotificationsDataProvider */ = {
 			isa = PBXGroup;
 			children = (
-				494F889E1C8739A300969602 /* SKBaseActivities.swift */,
-				494F88A21C874D3F00969602 /* SKProfileActivities.swift */,
-				494F88A41C874D4E00969602 /* SKShakeActivities.swift */,
-				494F88A61C874D5E00969602 /* SKInterestActivities.swift */,
-				494F88A81C874D7A00969602 /* SKQuoteActivities.swift */,
-				494F88AA1C874D8F00969602 /* SKPublicationActivities.swift */,
+				55982C8D1C9C0B7B00147130 /* SKBaseActivities.swift */,
+				55982C8E1C9C0B7B00147130 /* SKInterestActivities.swift */,
+				55982C8F1C9C0B7B00147130 /* SKProfileActivities.swift */,
+				55982C901C9C0B7B00147130 /* SKPublicationActivities.swift */,
+				55982C911C9C0B7B00147130 /* SKQuoteActivities.swift */,
+				55982C921C9C0B7B00147130 /* SKShakeActivities.swift */,
 			);
-			name = NotificationDataProvider;
+			path = NotificationsDataProvider;
 			sourceTree = "<group>";
 		};
 		D109CE4E1DF4699611C635D1 /* Frameworks */ = {
@@ -472,12 +466,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				494F88A31C874D3F00969602 /* SKProfileActivities.swift in Sources */,
-				494F88A71C874D5E00969602 /* SKInterestActivities.swift in Sources */,
 				495314151C7F45CD00AF5157 /* QuoteDescriptionView.swift in Sources */,
 				49851CC01C842CF700D0E104 /* Extensions.swift in Sources */,
 				499DB32A1C80586200A4F511 /* PhotoCollectionViewCell.swift in Sources */,
-				494F889F1C8739A300969602 /* SKBaseActivities.swift in Sources */,
 				497F35311C8896FF00E3911A /* SKImageContainerLayer.swift in Sources */,
 				490B1C301C6B443D00266E87 /* ViewController.swift in Sources */,
 				4953141B1C7F464B00AF5157 /* QuoteNotificationCell.swift in Sources */,
@@ -485,23 +476,24 @@
 				497F6C261C760A4D0007D40C /* NotificationCell.swift in Sources */,
 				4991AE691C75CDBA00C7C1E8 /* NotificationRequestsViewCell.swift in Sources */,
 				49F51F1A1C898ADA004A1628 /* PhotoCollectionDescriptionView.swift in Sources */,
-				494F88AB1C874D8F00969602 /* SKPublicationActivities.swift in Sources */,
-				493A96501C85F68900C4AD37 /* ActivitiesViewModel.swift in Sources */,
 				493E6D851C749C7B00379904 /* NotificationFooterViewCell.swift in Sources */,
+				55982C941C9C0B7B00147130 /* SKInterestActivities.swift in Sources */,
+				55982C931C9C0B7B00147130 /* SKBaseActivities.swift in Sources */,
 				4949799F1C7328AF0097E156 /* SKAvatarContainerView.swift in Sources */,
 				495314241C7F4BDA00AF5157 /* ShakeNotificationCell.swift in Sources */,
 				498342AC1C771FA100BB7F3B /* ProfileNotificationCell.swift in Sources */,
+				55982C961C9C0B7B00147130 /* SKPublicationActivities.swift in Sources */,
 				495314191C7F463400AF5157 /* PhotoPublicationNotificationCell.swift in Sources */,
-				494F88A51C874D4E00969602 /* SKShakeActivities.swift in Sources */,
 				490B1C2E1C6B443D00266E87 /* AppDelegate.swift in Sources */,
 				490B1C5C1C6B503500266E87 /* ActivitesViewController.swift in Sources */,
 				4953141D1C7F465900AF5157 /* InterestNotificationCell.swift in Sources */,
 				494F88A11C873A7600969602 /* Lazy.swift in Sources */,
-				494F88A91C874D7A00969602 /* SKQuoteActivities.swift in Sources */,
 				495314111C7F06EC00AF5157 /* Helper.swift in Sources */,
+				55982C981C9C0B7B00147130 /* SKShakeActivities.swift in Sources */,
+				55982C971C9C0B7B00147130 /* SKQuoteActivities.swift in Sources */,
 				49A0897D1C75C0A2007BAA2E /* NotificationTableHeaderViewCell.swift in Sources */,
 				495314131C7F45A800AF5157 /* PhotoPublicationDescriptionView.swift in Sources */,
-				49F51F1C1C899F27004A1628 /* PhotoTextDescriptionView.swift in Sources */,
+				55982C951C9C0B7B00147130 /* SKProfileActivities.swift in Sources */,
 				494979A11C7378F00097E156 /* SKDescriptionContainerView.swift in Sources */,
 				49A0897B1C75B84B007BAA2E /* ViewConstants.swift in Sources */,
 				495314261C7F586C00AF5157 /* SKFooterContainerView.swift in Sources */,

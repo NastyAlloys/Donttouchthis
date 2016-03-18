@@ -30,6 +30,17 @@ class InterestDescriptionView: DescriptionView {
     
     override func reload(data: SKBaseActivities) {
         super.reload(data)
+        
+        
+        
+        if let data = data as? SKInterestActivities {
+//            let url = NSURL(string: data.photos![0])
+//            let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+//            let image = UIImage(data: data!)
+//            //            self.descriptionButton.setIma
+//            self.descriptionButton.setImage(image, forState: .Normal)
+//            self.descriptionButton.addTarget(self, action: "pushShake:", forControlEvents: .TouchUpInside)
+        }
     }
     
     override func commonInit() {

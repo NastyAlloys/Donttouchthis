@@ -7,8 +7,6 @@ target 'ShakerNotifications' do
   pod 'Cartography', '~> 0.5'
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Alamofire', '~> 3.0'
-  pod 'Gloss', '~> 0.7'
-  pod 'ObjectMapper', '~> 1.1'
 end
 
 target 'ShakerNotificationsTests' do

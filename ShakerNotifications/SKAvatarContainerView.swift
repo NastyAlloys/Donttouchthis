@@ -6,10 +6,8 @@
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Cartography
-import SwiftyJSON
 
 class SKAvatarContainerView: UIView {
     // MARK: - Properties -
@@ -162,9 +160,9 @@ class SKAvatarContainerView: UIView {
         
         switch data.activityType {
         case .Profile:
-            iconImageView.image = UIImage(named: "icon-notify-user")
+            iconImageView.image = UIImage(named: "notification.icon.profile")
         case .Like:
-            iconImageView.image = UIImage(named: "icon-notify-like")
+            iconImageView.image = UIImage(named: "notification.icon.like")
         default:
             iconImageView.image = nil
         }

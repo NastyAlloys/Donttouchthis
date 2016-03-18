@@ -85,19 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ShakerNotifications/Alamofire.framework"
-  install_framework "Pods-ShakerNotifications/AlamofireObjectMapper.framework"
   install_framework "Pods-ShakerNotifications/Cartography.framework"
-  install_framework "Pods-ShakerNotifications/Gloss.framework"
-  install_framework "Pods-ShakerNotifications/ObjectMapper.framework"
   install_framework "Pods-ShakerNotifications/SwiftyJSON.framework"
   install_framework "Pods-ShakerNotifications/TTTAttributedLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ShakerNotifications/Alamofire.framework"
-  install_framework "Pods-ShakerNotifications/AlamofireObjectMapper.framework"
   install_framework "Pods-ShakerNotifications/Cartography.framework"
-  install_framework "Pods-ShakerNotifications/Gloss.framework"
-  install_framework "Pods-ShakerNotifications/ObjectMapper.framework"
   install_framework "Pods-ShakerNotifications/SwiftyJSON.framework"
   install_framework "Pods-ShakerNotifications/TTTAttributedLabel.framework"
 fi

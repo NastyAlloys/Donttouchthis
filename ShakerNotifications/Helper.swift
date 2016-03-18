@@ -43,10 +43,6 @@ func pluralize(var number: Int, form_for_1: String, form_for_2: String, form_for
 
 // MARK: - DATE -
 
-var Timestamp: NSTimeInterval {
-    return NSDate().timeIntervalSince1970 * 1000
-}
-
 var monthString: [Int: String] = [
     1: "янв",
     2: "фев",

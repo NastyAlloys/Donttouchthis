@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Cartography
 import Alamofire
 
 class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -27,7 +28,6 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 90
         tableView.backgroundColor = UIColor.whiteColor()
         
         // register your class with cell identifier
@@ -38,6 +38,11 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.view.addSubview(tableView)
         self.tableView.reloadData()
+        
+        tableView.updateConstraints()
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+
     }
     
     // MARK: - UITableViewDelegate -
@@ -46,9 +51,10 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let activity = dataFromJSON[indexPath.row]
-        let type = activity.activityType
-        let subtype = activity.activitySubtype
+        
+        let cellData = self.dataFromJSON[indexPath.row]
+        let type = cellData.activityType
+        let subtype = cellData.activitySubtype
         
         let cell: UITableViewCell
         
@@ -59,35 +65,72 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
             switch subtype {
             case .LikeInterest:
                 cell = tableView.dequeueReusableCellWithIdentifier("interestCell", forIndexPath: indexPath)
+            case .LikePublication:
+                cell = self.tableView.dequeueReusableCellWithIdentifier("photoPublicationCell", forIndexPath: indexPath)
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath)
             }
         default:
             cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath)
         }
+                        cell.updateConstraints()
         
         return cell
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
         let cellData = self.dataFromJSON[indexPath.row]
                 
         if let cell = cell as? ProfileNotificationCell {
             cell.reload(cellData)
+            cell.updateConstraints()
+        } else if let cell = cell as? InterestNotificationCell {
+            cell.reload(cellData)
+            cell.updateConstraints()
         } else if let cell = cell as? PhotoPublicationNotificationCell {
             cell.reload(cellData)
+            if let descriptionView = cell.descriptionView as? PhotoPublicationDescriptionView {
+                
+//                let height = descriptionView.layerContainerView.bounds.height + descriptionView.descriptionLabel.bounds.height
+//                
+//                constrain(descriptionView.layerContainerView, descriptionView.descriptionLabel) { layerContainerView, descriptionLabel in
+//                    guard let superview = descriptionLabel.superview else { return }
+//                    
+//                    descriptionLabel.top == superview.top
+//                    descriptionLabel.left == superview.left
+//                    descriptionLabel.right == superview.right
+//                    descriptionLabel.height == 15
+//                    
+//                    layerContainerView.top == descriptionLabel.bottom
+//                    layerContainerView.left == superview.left
+//                    
+//                    layerContainerView.bottom == superview.bottom
+//                    layerContainerView.right == superview.right
+////                    descriptionView.viewHeight = (layerContainerView.height == 50)
+//                    //            viewHeight?.constant == superview
+//                    
+//                    descriptionView.viewHeight?.constant = 40 * descriptionView.lines
+//                    
+//                }
+
+                cell.updateConstraints()
+            }
         } else if let cell = cell as? NotificationCell {
             cell.reload(cellData)
+            cell.updateConstraints()
         }
+        
+
     }
     
 //    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        return UITableViewAutomaticDimension
 //    }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50
-    }
+//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 50
+//    }
     
     // MARK: - Data Fetching Method -
     func getDataFromJSON(callback: (data: [SKBaseActivities]) -> ()) {

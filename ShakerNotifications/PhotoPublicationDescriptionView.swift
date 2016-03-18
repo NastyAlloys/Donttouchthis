@@ -7,117 +7,137 @@
 //
 
 import UIKit
-import SwiftyJSON
 import Cartography
 
-class PhotoPublicationDescriptionView: DescriptionView, UICollectionViewDelegateFlowLayout {
+class PhotoPublicationDescriptionView: DescriptionView {
     
     private(set) var descriptionButton: UIButton!
-    private(set) var publicationCollectionView: UICollectionView!
-    var collection = [String]()
+    private(set) var publicationData: SKPublicationActivities!
+    private(set) var publicationLayer: SKImageContainerLayer!
+    private(set) var layerContainerView: UIView!
+    private(set) var mainLayerWidth: CGFloat! = 0
+    var lines: CGFloat = 1
+    var viewHeight: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.commonInit()
+        self.localInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.commonInit()
-    }
-    
-    override func commonInit() {
-        
-        self.setUpPublicationCollectionView()
-        self.reset()
-        self.addSubview(self.publicationCollectionView)
-        
-        self.publicationCollectionView.registerClass(PhotoCollectionViewCell.self as AnyClass, forCellWithReuseIdentifier: "photoCollectionCell")
-        
-        constrain(self.publicationCollectionView) { publicationCollectionView in
-            guard let superview = publicationCollectionView.superview else { return }
-            publicationCollectionView.right == superview.right - 15
-            publicationCollectionView.bottom == superview.bottom
-            publicationCollectionView.left == superview.left
-            publicationCollectionView.top == superview.top
-            publicationCollectionView.height == 40
-        }
-    }
-    
-    private func setUpPublicationCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake(42, 42)
-        self.publicationCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        self.publicationCollectionView.scrollsToTop = false
-        self.publicationCollectionView.delegate = self
-        self.publicationCollectionView.dataSource = self
-        self.publicationCollectionView.backgroundColor = UIColor.whiteColor()
-        self.publicationCollectionView.bounces = false
-        self.publicationCollectionView.delegate = self
-        self.publicationCollectionView.dataSource = self
+        self.localInit()
     }
     
     override func reset() {
         super.reset()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if let publicationLayer = self.publicationLayer {
+            
+            publicationLayer.frame = self.layerContainerView.layer.bounds
+            self.layerContainerView.layer.backgroundColor = UIColor.clearColor().CGColor
+            
+            self.publicationLayer.setupLayerWithLines(size: CGSize(width: 42, height: 42), offset: 5, maxCount: 12)
+        }
+    }
+    
+    private func localInit() {
+        self.clipsToBounds = true
+        self.setupLayerContainerView()
+        self.setUpPublicationLayer()
+//                    viewHeight?.constant = 80
+    }
+
     override func reload(data: SKBaseActivities) {
         super.reload(data)
+        if let data = data as? SKPublicationActivities {
+            if data.with_photo {
+                publicationData = data
+                self.setNeedsLayout()
+                self.layoutIfNeeded()
+                updatePublications()
+            }
+        }
     }
     
-    class func getCellHeightForCollectionCount(count: Int, andOrientation orientation: UIDeviceOrientation) -> CGFloat {
-        if count < 2 {
-            return 0
-        }
-        
-        if orientation.isPortrait {
-            let width: CGFloat = min(UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height) - 75
-            return self.getBlockHeight(width, count: count)
-        } else if orientation.isLandscape {
-            let width: CGFloat = max(UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height) - 75
-            return self.getBlockHeight(width, count: count)
-        }
-        
-        return 0
+    private func setUpDescriptionButton() {
+        self.descriptionButton = UIButton()
+        self.descriptionButton.backgroundColor = UIColor.blackColor()
+        self.descriptionButton.layer.shouldRasterize = true
+        self.descriptionButton.layer.rasterizationScale = UIScreen.mainScreen().scale
     }
     
-    class func getBlockHeight(width: CGFloat, count: Int) -> CGFloat {
-        let countInRow = floor(width / 40)
-        let rows = round(Float(count) / Float(countInRow) + 0.45)
-        let roundValue = round(rows * 40)
+    private func setupLayerContainerView() {
+        self.layerContainerView = UIView()
+        self.layerContainerView.backgroundColor = UIColor.whiteColor()
+        self.layerContainerView.clipsToBounds = true
+        self.addSubview(self.layerContainerView)
         
-        return CGFloat(roundValue)
-    }
-}
+        let height = layerContainerView.bounds.height + self.descriptionLabel.bounds.height
+        
+        constrain(self.layerContainerView, self.descriptionLabel) { layerContainerView, descriptionLabel in
+            guard let superview = descriptionLabel.superview else { return }
+            
+            descriptionLabel.top == superview.top
+            descriptionLabel.left == superview.left
+            descriptionLabel.right == superview.right
+            descriptionLabel.height == 15
+            
+            layerContainerView.top == descriptionLabel.bottom
+            layerContainerView.left == superview.left
+            
+            layerContainerView.bottom == superview.bottom
+            layerContainerView.right == superview.right
+            viewHeight = (layerContainerView.height == 50)
+//            viewHeight?.constant == superview
+            viewHeight?.constant = height
 
-extension PhotoPublicationDescriptionView: UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collection.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = publicationCollectionView.dequeueReusableCellWithReuseIdentifier("photoCollectionCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
-        return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        let url = collection[indexPath.item]
-        if let cell = cell as? PhotoCollectionViewCell {
-            cell.reload(url)
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 42, height: 42)
+    // TODO make constants
+    private func setUpPublicationLayer() {
+        self.publicationLayer = SKImageContainerLayer()
+        self.publicationLayer.backgroundColor = UIColor.clearColor().CGColor
+//        self.publicationLayer.backgroundColor = UIColor.blueColor().CGColor
+        self.layerContainerView.layer.addSublayer(self.publicationLayer)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5
+    private func updatePublications() {
+        var currentWidth: CGFloat = 0
+        let count = self.publicationData.count!
+//        let count = 12
+        
+        self.publicationLayer.displayImages(count: count, clear: true) { index, layer in
+            layer.contentsGravity = kCAGravityResizeAspect
+            layer.cornerRadius = 0.8
+            layer.contents = UIImage(named: "icon-notify-like")?.CGImage
+            
+            currentWidth += layer.bounds.width
+            
+            if currentWidth >= self.layerContainerView.bounds.width {
+                currentWidth = 0
+                self.lines += CGFloat(1)
+            }
+            
+        }
+        
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let p: CGPoint = touches.first!.locationInView(self)
+        for layer: CALayer in self.publicationLayer.sublayers! {
+            if layer.containsPoint(self.publicationLayer.convertPoint(p, toLayer: layer)) {
+                print("нажали на картиночку")
+//                let publicationSourceUrl = NSURL(string: "shaker://interestSource/\(interestData.interest_id)")!
+//                UIApplication.sharedApplication().openURL(interestSourceUrl)
+            }
+        }
     }
 }
