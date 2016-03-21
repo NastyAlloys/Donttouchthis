@@ -17,7 +17,6 @@ class PhotoPublicationDescriptionView: DescriptionView {
     private(set) var layerContainerView: UIView!
     private(set) var mainLayerWidth: CGFloat! = 0
     var lines: CGFloat = 1
-    var viewHeight: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +50,6 @@ class PhotoPublicationDescriptionView: DescriptionView {
         self.clipsToBounds = true
         self.setupLayerContainerView()
         self.setUpPublicationLayer()
-//                    viewHeight?.constant = 80
     }
 
     override func reload(data: SKBaseActivities) {
@@ -64,6 +62,10 @@ class PhotoPublicationDescriptionView: DescriptionView {
                 updatePublications()
             }
         }
+        
+//        descriptionButton.sizeToFit()
+//        let height = descriptionLabel.frame.height > descriptionButton.frame.height ? descriptionLabel.frame.height : descriptionButton.frame.height
+        self.viewHeight?.constant = 100
     }
     
     private func setUpDescriptionButton() {
@@ -94,9 +96,9 @@ class PhotoPublicationDescriptionView: DescriptionView {
             
             layerContainerView.bottom == superview.bottom
             layerContainerView.right == superview.right
-            viewHeight = (layerContainerView.height == 50)
+//            viewHeight = (layerContainerView.height == 50)
 //            viewHeight?.constant == superview
-            viewHeight?.constant = height
+//            viewHeight?.constant = 100
 
         }
     }
@@ -105,14 +107,13 @@ class PhotoPublicationDescriptionView: DescriptionView {
     private func setUpPublicationLayer() {
         self.publicationLayer = SKImageContainerLayer()
         self.publicationLayer.backgroundColor = UIColor.clearColor().CGColor
-//        self.publicationLayer.backgroundColor = UIColor.blueColor().CGColor
         self.layerContainerView.layer.addSublayer(self.publicationLayer)
     }
     
     private func updatePublications() {
         var currentWidth: CGFloat = 0
+        var currentHeight: CGFloat = 0
         let count = self.publicationData.count!
-//        let count = 12
         
         self.publicationLayer.displayImages(count: count, clear: true) { index, layer in
             layer.contentsGravity = kCAGravityResizeAspect
@@ -126,7 +127,13 @@ class PhotoPublicationDescriptionView: DescriptionView {
                 self.lines += CGFloat(1)
             }
             
+            currentHeight += layer.bounds.height
         }
+        
+        
+//        viewHeight?.constant = 10000
+        
+        print("PUBLICATIONS \(currentHeight)")
         
     }
     

@@ -30,7 +30,22 @@ class SKPublicationActivities: SKBaseActivities {
     override var activityDescription: Lazy<NSAttributedString> {
         get {
             return Lazy {
-                return NSAttributedString(string: "publication")
+                // генерируем строку пользователей, которым понравилась цитата
+                let userAttributedString = NSMutableAttributedString()
+                
+                let ownerUrl = NSURL(string: "shaker://user/\(self.user_ids[0])")!
+                userAttributedString.appendAttributedString(
+                    NSAttributedString(string: self.user_names[0],
+                        attributes: [
+                            NSLinkAttributeName : ownerUrl,
+                            NSUnderlineStyleAttributeName : NSUnderlineStyle.StyleNone.rawValue
+                        ]
+                    )
+                )
+                
+                userAttributedString.appendAttributedString(NSAttributedString(string: " нравится \(self.count!) публикаций"))
+                
+                return userAttributedString
             }
         }
     }

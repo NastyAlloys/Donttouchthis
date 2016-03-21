@@ -15,54 +15,58 @@ class ShakeDescriptionView: DescriptionView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.commonInit()
+        self.localInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.commonInit()
+        self.localInit()
     }
     
     override func reset() {
         super.reset()
         
-        self.descriptionButton.setImage(nil, forState: .Normal)
-        self.descriptionLabel.text = ""
+//        self.descriptionButton.imageView?.image = nil
     }
     
     override func reload(data: SKBaseActivities) {
         super.reload(data)
+        
+        descriptionButton.sizeToFit()
+        let height = descriptionLabel.frame.height > descriptionButton.frame.height ? descriptionLabel.frame.height : descriptionButton.frame.height
+        viewHeight?.constant = height
     }
     
-    override func commonInit() {
-        super.commonInit()
+    private func localInit() {
         self.setUpDescriptionButton()
-        self.reset()
-        self.addSubview(self.descriptionLabel)
         self.addSubview(self.descriptionButton)
         
-        constrain(descriptionButton, descriptionLabel) { descriptionButton, descriptionLabel in
-            guard let superview = descriptionButton.superview else { return }
+        constrain(self.descriptionLabel, self.descriptionButton) { descriptionLabel, descriptionButton in
+            guard let superview = descriptionLabel.superview else { return }
+            
+            descriptionLabel.top == superview.top
+            descriptionLabel.left == superview.left
             
             descriptionButton.width == 35
             descriptionButton.height == 35
-            descriptionButton.right == superview.right - 15
-            descriptionButton.top == superview.top + 10
             
-            descriptionLabel.top == superview.top + 10
-            descriptionLabel.bottom == superview.bottom - 10
-            descriptionLabel.left == superview.left + 10
+            descriptionButton.right == superview.right - 15
+            descriptionButton.top == superview.top
+//            descriptionButton.bottom == superview.bottom + 15
+            
             descriptionLabel.right == descriptionButton.left - 10
-            descriptionLabel.height == 100
+            descriptionLabel.bottom == superview.bottom
         }
     }
     
     private func setUpDescriptionButton() {
         self.descriptionButton = UIButton()
         self.descriptionButton.backgroundColor = UIColor.blackColor()
-        self.descriptionButton.setTitle("SHIT", forState: .Normal)
+        self.descriptionButton.setImage(UIImage(named: "no-photo"), forState: .Normal)
         self.descriptionButton.layer.shouldRasterize = true
         self.descriptionButton.layer.rasterizationScale = UIScreen.mainScreen().scale
+        
+        self.descriptionButton.addTarget(self, action: "pushShake:", forControlEvents: .TouchUpInside)
     }
 }

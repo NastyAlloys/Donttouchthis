@@ -12,29 +12,39 @@ import Cartography
 
 class ProfileDescriptionView: DescriptionView {
     
+//    var labelHeight: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.commonInit()
+        self.localInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.commonInit()
+        self.localInit()
     }
     
     override func reset() {
         super.reset()
-        
     }
     
     override func reload(data: SKBaseActivities) {
         super.reload(data)
         
+//        labelHeight!.constant = descriptionLabel.frame.height
+        viewHeight?.constant = descriptionLabel.frame.height
     }
     
-    override func commonInit() {
-        super.commonInit()
+    private func localInit() {
+        constrain(self.descriptionLabel) { descriptionLabel in
+            guard let superview = descriptionLabel.superview else { return }
+            
+            descriptionLabel.top == superview.top
+            descriptionLabel.bottom == superview.bottom
+            descriptionLabel.left == superview.left
+            descriptionLabel.right == superview.right
+        }
     }
 }

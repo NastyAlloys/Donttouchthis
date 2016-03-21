@@ -13,7 +13,7 @@ import TTTAttributedLabel
 class DescriptionView: UIView {
     // MARK: Properties
     private(set) var descriptionLabel: TTTAttributedLabel!
-    var descriptionLabelHeight: NSLayoutConstraint?
+    var viewHeight: NSLayoutConstraint?
     
     // MARK: - Initialization -
     override init(frame: CGRect) {
@@ -28,20 +28,19 @@ class DescriptionView: UIView {
         self.commonInit()
     }
     
+    override func updateConstraints() {
+        
+        constrain(self) { descriptionView in
+            viewHeight = descriptionView.height == 10
+        }
+        super.updateConstraints()
+    }
+    
     func commonInit() {
         self.clipsToBounds = true
         self.setUpDescriptionLabel()
         self.reset()
         self.addSubview(self.descriptionLabel)
-        /*
-        constrain(descriptionLabel) { descriptionLabel in
-            guard let superview = descriptionLabel.superview else { return }
-            
-            descriptionLabel.top == superview.top
-            descriptionLabel.bottom == superview.bottom
-            descriptionLabel.left == superview.left
-            descriptionLabel.right == superview.right
-        }*/
     }
     
     // MARK: - UIView update -
@@ -51,6 +50,7 @@ class DescriptionView: UIView {
     
     func reload(data: SKBaseActivities) {
         self.descriptionLabel.setText(data.activityDescription.value)
+        descriptionLabel.sizeToFit()
     }
     
     private func setUpDescriptionLabel() {
@@ -64,6 +64,8 @@ class DescriptionView: UIView {
         self.descriptionLabel.textColor = UIColor.lightGrayColor()
         self.descriptionLabel.numberOfLines = 0
         self.descriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+//        descriptionLabel.setContentHuggingPriority(1000, forAxis: UILayoutConstraintAxis.Horizontal)
+//        descriptionLabel.setContentCompressionResistancePriority(500, forAxis: UILayoutConstraintAxis.Horizontal)
     }
 }
 

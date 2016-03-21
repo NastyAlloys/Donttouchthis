@@ -16,18 +16,17 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     var tableView = UITableView()
     var request: Request!
     let activitiesUrl = "https://stagingapi.shakerapp.ru/v10/feedback/activities"
+    var makeItStop = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.getDataFromJSON({dataFromJSON in
-            self.dataFromJSON = dataFromJSON
-            self.tableView.reloadData()
-        })
-        
         tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+
         tableView.backgroundColor = UIColor.whiteColor()
         
         // register your class with cell identifier
@@ -35,14 +34,15 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.registerClass(PhotoPublicationNotificationCell.self as AnyClass, forCellReuseIdentifier: "photoPublicationCell")
         self.tableView.registerClass(InterestNotificationCell.self as AnyClass, forCellReuseIdentifier: "interestCell")
         self.tableView.registerClass(NotificationCell.self as AnyClass, forCellReuseIdentifier: "notificationCell")
+        self.tableView.registerClass(QuoteNotificationCell.self as AnyClass, forCellReuseIdentifier: "quoteCell")
+        self.tableView.registerClass(ShakeNotificationCell.self as AnyClass, forCellReuseIdentifier: "shakeCell")
         
         self.view.addSubview(tableView)
-        self.tableView.reloadData()
         
-        tableView.updateConstraints()
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
-
+        self.getDataFromJSON({dataFromJSON in
+            self.dataFromJSON = dataFromJSON
+            self.tableView.reloadData()
+        })
     }
     
     // MARK: - UITableViewDelegate -
@@ -56,24 +56,27 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
         let type = cellData.activityType
         let subtype = cellData.activitySubtype
         
-        let cell: UITableViewCell
+        var cell = NotificationCell()
         
         switch type {
         case .Profile:
-            cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier("profileCell", forIndexPath: indexPath) as! ProfileNotificationCell
         case .Like:
             switch subtype {
             case .LikeInterest:
-                cell = tableView.dequeueReusableCellWithIdentifier("interestCell", forIndexPath: indexPath)
+                cell = tableView.dequeueReusableCellWithIdentifier("interestCell", forIndexPath: indexPath) as! InterestNotificationCell
+            case .LikeShake:
+                cell = tableView.dequeueReusableCellWithIdentifier("shakeCell", forIndexPath: indexPath) as! ShakeNotificationCell
+            case .LikeQuote:
+                cell = tableView.dequeueReusableCellWithIdentifier("quoteCell", forIndexPath: indexPath) as! QuoteNotificationCell
             case .LikePublication:
-                cell = self.tableView.dequeueReusableCellWithIdentifier("photoPublicationCell", forIndexPath: indexPath)
+                cell = tableView.dequeueReusableCellWithIdentifier("photoPublicationCell", forIndexPath: indexPath) as! PhotoPublicationNotificationCell
             default:
-                cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath)
+                cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath) as! NotificationCell
             }
         default:
-            cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath) as! NotificationCell
         }
-                        cell.updateConstraints()
         
         return cell
     }
@@ -84,53 +87,23 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
                 
         if let cell = cell as? ProfileNotificationCell {
             cell.reload(cellData)
-            cell.updateConstraints()
         } else if let cell = cell as? InterestNotificationCell {
             cell.reload(cellData)
-            cell.updateConstraints()
         } else if let cell = cell as? PhotoPublicationNotificationCell {
             cell.reload(cellData)
-            if let descriptionView = cell.descriptionView as? PhotoPublicationDescriptionView {
-                
-//                let height = descriptionView.layerContainerView.bounds.height + descriptionView.descriptionLabel.bounds.height
-//                
-//                constrain(descriptionView.layerContainerView, descriptionView.descriptionLabel) { layerContainerView, descriptionLabel in
-//                    guard let superview = descriptionLabel.superview else { return }
-//                    
-//                    descriptionLabel.top == superview.top
-//                    descriptionLabel.left == superview.left
-//                    descriptionLabel.right == superview.right
-//                    descriptionLabel.height == 15
-//                    
-//                    layerContainerView.top == descriptionLabel.bottom
-//                    layerContainerView.left == superview.left
-//                    
-//                    layerContainerView.bottom == superview.bottom
-//                    layerContainerView.right == superview.right
-////                    descriptionView.viewHeight = (layerContainerView.height == 50)
-//                    //            viewHeight?.constant == superview
-//                    
-//                    descriptionView.viewHeight?.constant = 40 * descriptionView.lines
-//                    
-//                }
-
-                cell.updateConstraints()
-            }
         } else if let cell = cell as? NotificationCell {
             cell.reload(cellData)
-            cell.updateConstraints()
+        } else if let cell = cell as? QuoteNotificationCell {
+            cell.reload(cellData)
+        } else if let cell = cell as? ShakeNotificationCell {
+            cell.reload(cellData)
         }
         
-
+        if indexPath.row == ((tableView.indexPathsForVisibleRows?.count)! - 1) && makeItStop == false {
+            makeItStop = true
+            tableView.reloadData()
+        }
     }
-    
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-    
-//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 50
-//    }
     
     // MARK: - Data Fetching Method -
     func getDataFromJSON(callback: (data: [SKBaseActivities]) -> ()) {

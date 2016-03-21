@@ -57,6 +57,7 @@ class NotificationCell: UITableViewCell {
         self.avatarView.reload(data)
         self.footerView.reload(data)
         self.descriptionView.reload(data)
+
     }
     
     /*
@@ -83,21 +84,14 @@ class NotificationCell: UITableViewCell {
             avatarView.bottom == superview.bottom
             
             descriptionView.top == superview.top + 10
-            descriptionView.bottom <= footerView.top - 10
             descriptionView.left == avatarView.right + 10
             descriptionView.right == superview.right - 10 ~ 751
             
             footerView.bottom == superview.bottom - 10
             footerView.left == avatarView.right + 10
             footerView.right == superview.right - 10 ~ 751
+            footerView.top == descriptionView.bottom + 10
             
         }
-    }
-    
-    func setupSize() -> CGFloat {
-        
-        let height = self.footerView.bounds.height + self.descriptionView.bounds.height + 40
-        return height
-        
     }
 }
