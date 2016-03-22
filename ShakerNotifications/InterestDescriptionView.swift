@@ -61,7 +61,6 @@ class InterestDescriptionView: DescriptionView {
             self.descriptionButton.addTarget(self, action: "interestButtonTouch:", forControlEvents: .TouchUpInside)
         }
         
-        descriptionButton.sizeToFit()
         let height = descriptionLabel.frame.height > descriptionButton.frame.height ? descriptionLabel.frame.height : descriptionButton.frame.height
         viewHeight?.constant = height
     }

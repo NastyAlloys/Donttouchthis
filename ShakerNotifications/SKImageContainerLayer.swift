@@ -116,9 +116,9 @@ class SKImageContainerLayer: CALayer {
             
             j += 1
             
-//            print("mainLayerWidth: \(mainLayerWidth)")
-//            print("currentwidth: \(currentWidth)")
-//            print("axisY: \(axisY)")
+            print("currentwidth: \(currentWidth)")
+            print("axisY: \(axisY)")
+            print("axisX: \(axisX)")
             
             let avatarLayer = CALayer()
             avatarLayer.backgroundColor = UIColor.groupTableViewBackgroundColor().CGColor
@@ -132,7 +132,7 @@ class SKImageContainerLayer: CALayer {
 //            print("avatarLayerFrame: \(avatarLayer.frame)")
             
             self.addSublayer(avatarLayer)
-            
+            print("FRAMEMEME \(self.frame)")
             currentWidth += avatarLayer.frame.width
             
         }

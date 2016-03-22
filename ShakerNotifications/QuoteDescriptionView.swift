@@ -59,7 +59,6 @@ class QuoteDescriptionView: DescriptionView {
             self.descriptionButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
         }
         
-        descriptionButton.sizeToFit()
         let height = descriptionLabel.frame.height > descriptionButton.frame.height ? descriptionLabel.frame.height : descriptionButton.frame.height
         self.viewHeight?.constant = height
     }
