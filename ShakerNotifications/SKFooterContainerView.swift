@@ -1,6 +1,6 @@
 //
 //  SKFooterContainerView.swift
-//  ShakerNotifications
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 25.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
@@ -59,7 +59,7 @@ class SKFooterContainerView: UIView {
         
     }
     
-    func reload(data: SKBaseActivities) {
+    func reload(data: SKBaseFeedback) {
         
         let timestamp = data.timestamp
         

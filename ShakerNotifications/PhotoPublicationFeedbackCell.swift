@@ -1,15 +1,13 @@
 //
-//  ShakeNotificationCell.swift
-//  ShakerNotifications
+//  PublicationFeedbackCell.swift
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 25.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
-import Foundation
-
-class ShakeNotificationCell: NotificationCell {
+class PhotoPublicationFeedbackCell: FeedbackCell {
     override func descriptionViewClass() -> DescriptionView.Type {
-        return ShakeDescriptionView.self
+        return PhotoPublicationDescriptionView.self
     }
 }

@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  ShakerNotifications
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 29.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
@@ -105,5 +105,25 @@ extension UIImageView {
             }
             task.resume()
         }
+    }
+}
+
+extension String {
+    /*
+        Укорачивает строку, если в ней больше n-символов
+    */
+    public func substringToCharactersCount(charactersCount charactersCount: Int) -> String {
+        var abridgment: String = self
+        
+        //  если текст цитаты больше n символов, то укорачиваем до n-3 символов и добавляем троеточие
+        // TODO стирать whitespace
+        if self.characters.count > charactersCount {
+            let index = charactersCount - 3
+            abridgment = self.substringToIndex(self.startIndex.advancedBy(index))
+            let dot = "." as Character
+            abridgment += String(count: 3, repeatedValue: dot)
+        }
+        
+        return abridgment
     }
 }

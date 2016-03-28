@@ -1,6 +1,6 @@
 //
 //  BodyDescriptionView.swift
-//  ShakerNotifications
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 19.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
@@ -11,8 +11,6 @@ import TTTAttributedLabel
 import Cartography
 
 class ProfileDescriptionView: DescriptionView {
-    
-//    var labelHeight: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,21 +28,20 @@ class ProfileDescriptionView: DescriptionView {
         super.reset()
     }
     
-    override func reload(data: SKBaseActivities) {
+    override func reload(data: SKBaseFeedback) {
         super.reload(data)
         
-//        labelHeight!.constant = descriptionLabel.frame.height
-        viewHeight?.constant = descriptionLabel.frame.height
+        if let data = data as? SKProfileFeedback {
+            if data.includes_me == true {
+                setVisibleButtonConstraints()
+            } else {
+                setHiddenButtonConstraints()
+            }
+        }
+        
+//        viewHeight?.constant = descriptionLabel.frame.height + footerView.frame.height
+//        print(viewHeight!.constant)
     }
     
-    private func localInit() {
-        constrain(self.descriptionLabel) { descriptionLabel in
-            guard let superview = descriptionLabel.superview else { return }
-            
-            descriptionLabel.top == superview.top
-            descriptionLabel.bottom == superview.bottom
-            descriptionLabel.left == superview.left
-            descriptionLabel.right == superview.right
-        }
-    }
+    private func localInit() {}
 }

@@ -1,6 +1,6 @@
 //
-//  SKBaseActivities.swift
-//  ShakerNotifications
+//  SKBaseFeedback.swift
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 02.03.16.
 //  Copyright © 2016 Andrey. All rights reserved.
@@ -9,35 +9,86 @@
 import UIKit
 import SwiftyJSON
 
-// MARK: - Activity Type & Subtype Enum -
-@objc enum SKActivitiesModelType: Int {
-    case None, Like, Profile
+// MARK: - FEEDBACK MODEL -
+enum SKFeedbackModel: String {
+    case None, Profile
+    case LikeShake, LikePublication, LikeQuote, LikeInterest
+    case CommentPublication, CommentQuote, CommentShake
+    case MentionPublication, MentionComment
+    case RepostPublication, RepostQuote
     
-    init(json: JSON) {
-        switch json.stringValue {
-        case "like":
-            self = .Like
-        case "profile":
+    init(type: JSON, subtype: JSON) {
+        switch (type.stringValue, subtype.stringValue) {
+            
+        // ЛАЙК ШЕЙКА
+        case ("like", "shake"):
+            self = .LikeShake
+            
+        // ЛАЙК ПУБЛИКАЦИИ
+        case ("like", "publication"):
+            self = .LikePublication
+            
+        // ЛАЙК ЦИТАТЫ
+        case ("like", "quote"):
+            self = .LikeQuote
+            
+        // ЛАЙК НОВОСТИ
+        case ("like", "interest"):
+            self = .LikeInterest
+            
+        // ПОДПИСКА
+        case ("profile", ""):
             self = .Profile
+            
+        // РЕПОСТ ПУБЛИКАЦИИ
+        case ("repost", "publication"):
+            self = .RepostPublication
+            
+        // РЕПОСТ ЦИТАТЫ
+        case ("repost", "quote"):
+            self = .RepostQuote
+            
+        // УПОМИНАНИЕ ПУБЛИКАЦИИ
+        case ("mention", "publication"):
+            self = .MentionPublication
+            
+        // УПОМИНАНИЕ КОММЕНТА
+        case ("mention", "comment"):
+            self = .MentionComment
+            
+        // КОММЕНТ К ПУБЛИКАЦИИ
+        case ("comment", "publication"):
+            self = .CommentPublication
+            
+        // КОММЕНТ К ШЕЙКУ
+        case ("comment", "shake"):
+            self = .CommentShake
+            
+        // КОММЕНТ К ЦИТАТЕ
+        case ("comment", "quote"):
+            self = .CommentQuote
+            
         default:
             self = .None
         }
     }
 }
 
-@objc enum SKActivitiesModelSubtype: Int {
-    case None, Profile, Like, LikeShake, LikePublication, LikeQuote, LikeInterest
+enum SKFeedbackType: String {
+    case None, Profile, Like, Comment, Mention, Repost
     
     init(json: JSON) {
         switch json.stringValue {
-        case "shake":
-            self = .LikeShake
-        case "publication":
-            self = .LikePublication
-        case "quote":
-            self = .LikeQuote
-        case "interest":
-            self = .LikeInterest
+        case "profile":
+            self = .Profile
+        case "like":
+            self = .Like
+        case "comment":
+            self = .Comment
+        case "mention":
+            self = .Mention
+        case "repost":
+            self = .Repost
         default:
             self = .None
         }
@@ -55,9 +106,9 @@ struct UserAvatar {
     }
 }
 
-class SKBaseActivities {
+class SKBaseFeedback {
     // Описание для DescriptionView
-    var activityDescription: Lazy<NSAttributedString> {
+    var feedbackDescription: Lazy<NSAttributedString> {
         get {
             return Lazy {
                 return NSAttributedString(string: "")
@@ -66,11 +117,12 @@ class SKBaseActivities {
     }
     
     // MARK: - Initialization -
-    private(set) var activityId: String = ""
-    private(set) var activityType: SKActivitiesModelType = .None
-    private(set) var activitySubtype: SKActivitiesModelSubtype = .None
+    private(set) var feedbackId: String = ""
+    private(set) var feedbackModelType: SKFeedbackModel = .None
+    private(set) var feedbackType: SKFeedbackType = .None
+    private(set) var feedbackSubtype: String = ""
     private(set) var timestamp: NSTimeInterval = 0
-    private(set) var with_photo: Bool = false
+    private(set) var with_photo: Int = 0
     private(set) var user_ids: [String] = []
     private(set) var user_names: [String] = []
     private(set) var user_avatar: UserAvatar?
@@ -83,11 +135,12 @@ class SKBaseActivities {
     }
     
     required init(json: JSON) {
-        self.activityId = json["id"].stringValue
-        self.activityType = SKActivitiesModelType(json: json["type"])
-        self.activitySubtype = SKActivitiesModelSubtype(json: json["subtype"])
+        self.feedbackId = json["id"].stringValue
+        self.feedbackModelType = SKFeedbackModel(type: json["type"], subtype: json["subtype"])
+        self.feedbackType = SKFeedbackType(json: json["type"])
+        self.feedbackSubtype = json["subtype"].stringValue
         self.timestamp = json["timestamp"].doubleValue
-        self.with_photo = json["with_photo"].boolValue
+        self.with_photo = json["with_photo"].intValue
         self.user_ids = json["user_ids"].arrayObject as! [String]
         self.user_names = json["user_names"].arrayObject as! [String]
         self.user_avatar = UserAvatar(json: json["user_avatar"])
@@ -97,28 +150,41 @@ class SKBaseActivities {
     }
     
     /*
-        Конвертирует json-данные в определенный класс, основываясь на type и subtype
+        Конвертирует json-данные в определенный класс, основываясь SKFeedbackModelType
     */
-    final class func convert(json json: JSON) -> SKBaseActivities? {
-        let type = SKActivitiesModelType(json: json["type"])
-        let subtype = SKActivitiesModelSubtype(json: json["subtype"])
+    final class func convert(json json: JSON) -> SKBaseFeedback? {
+        let feedbackModelType = SKFeedbackModel(type: json["type"], subtype: json["subtype"])
         
-        switch type {
+        switch feedbackModelType {
+        // Профиль
         case .Profile:
-            return SKProfileActivities(json: json)
-        case .Like:
-            switch subtype {
-            case .LikeShake:
-                return SKShakeActivities(json: json)
-            case .LikeInterest:
-                return SKInterestActivities(json: json)
-            case .LikeQuote:
-                return SKQuoteActivities(json: json)
-            case .LikePublication:
-                return SKPublicationActivities(json: json)
-            default:
-                break
-            }
+            return SKProfileFeedback(json: json)
+        // Лайк
+        case .LikeShake:
+            return SKLikeShakeFeedback(json: json)
+        case .LikeInterest:
+            return SKLikeInterestFeedback(json: json)
+        case .LikeQuote:
+            return SKLikeQuoteFeedback(json: json)
+        case .LikePublication:
+            return SKLikePublicationFeedback(json: json)
+        // Коммент
+        case .CommentShake:
+            return SKCommentShakeFeedback(json: json)
+        case .CommentQuote:
+            return SKCommentQuoteFeedback(json: json)
+        case .CommentPublication:
+            return SKCommentPublicationFeedback(json: json)
+        // Репост
+        case .RepostQuote:
+            return SKRepostQuoteFeedback(json: json)
+        case .RepostPublication:
+            return SKRepostPublicationFeedback(json: json)
+        // Упоминание
+        case .MentionComment:
+            return SKMentionCommentFeedback(json: json)
+        case .MentionPublication:
+            return SKMentionPublicationFeedback(json: json)
         default:
             break
         }

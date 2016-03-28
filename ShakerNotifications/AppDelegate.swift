@@ -17,10 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.whiteColor()
         window!.rootViewController = ActivitiesViewController()
+//        window!.rootViewController = NotificationsViewController()
         window!.makeKeyAndVisible()
 //        self.window = UIWindow.init(frame: UIScreen.mainScreen())
 //        window!.backgroundColor = UIColor.whiteColor()
-//        window!.rootViewController = ActivitiesViewController()
         return true
     }
 

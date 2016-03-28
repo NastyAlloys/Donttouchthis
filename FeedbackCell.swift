@@ -1,6 +1,6 @@
 //
 //  NotficationBodyViewCell.swift
-//  ShakerNotifications
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 10.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
@@ -12,11 +12,11 @@ import Foundation
 import Cartography
 import SwiftyJSON
 
-class NotificationCell: UITableViewCell {
+class FeedbackCell: UITableViewCell {
     // MARK: - Properties -
     var avatarView: SKAvatarContainerView!
-    var footerView: SKFooterContainerView!
     private(set) var descriptionView: DescriptionView!
+    var viewHeight: NSLayoutConstraint?
     
     func descriptionViewClass() -> DescriptionView.Type {
         return DescriptionView.self
@@ -43,7 +43,6 @@ class NotificationCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.descriptionView.reset()
         self.avatarView.reset()
-        self.footerView.reset()
     }
     
     private func commonInit() {
@@ -52,12 +51,14 @@ class NotificationCell: UITableViewCell {
         self.reset()
     }
     
-    func reload(data: SKBaseActivities) {
+    func reload(data: SKBaseFeedback) {
         self.reset()
-        self.avatarView.reload(data)
-        self.footerView.reload(data)
         self.descriptionView.reload(data)
-
+        self.avatarView.reload(data)
+//        self.avatarView.sizeToFit()
+//        self.descriptionView.sizeToFit()
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     /*
@@ -69,29 +70,25 @@ class NotificationCell: UITableViewCell {
         self.clipsToBounds = true
         
         self.avatarView = SKAvatarContainerView()
-        self.footerView = SKFooterContainerView()
         self.descriptionView = self.descriptionViewClass().init()
         
         self.contentView.addSubview(self.avatarView)
-        self.contentView.addSubview(self.footerView)
         self.contentView.addSubview(self.descriptionView)
         
-        constrain(avatarView, footerView, descriptionView) { avatarView, footerView, descriptionView in
+        constrain(avatarView, descriptionView) { avatarView, descriptionView in
             guard let superview = avatarView.superview else { return }
             
             avatarView.left == superview.left + 10
             avatarView.top == superview.top + 10
-            avatarView.bottom == superview.bottom
+            avatarView.bottom >= superview.bottom - 10 ~ UILayoutPriority(900)
             
             descriptionView.top == superview.top + 10
             descriptionView.left == avatarView.right + 10
-            descriptionView.right == superview.right - 10 ~ 751
-            
-            footerView.bottom == superview.bottom - 10
-            footerView.left == avatarView.right + 10
-            footerView.right == superview.right - 10 ~ 751
-            footerView.top == descriptionView.bottom + 10
+            descriptionView.right == superview.right - 10
+            descriptionView.bottom >= superview.bottom - 10 ~ UILayoutPriority(900)
             
         }
+        
+        self.descriptionView.setContentCompressionResistancePriority(900, forAxis: UILayoutConstraintAxis.Vertical)
     }
 }

@@ -1,14 +1,12 @@
 //
-//  BodyNotificationCell.swift
-//  ShakerNotifications
+//  BodyFeedbackCell.swift
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 19.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
 //
 
-import Foundation
-
-class ProfileNotificationCell: NotificationCell {
+class ProfileFeedbackCell: FeedbackCell {
     override func descriptionViewClass() -> DescriptionView.Type {
         return ProfileDescriptionView.self
     }

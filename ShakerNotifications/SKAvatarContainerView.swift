@@ -1,6 +1,6 @@
 //
 //  SKAvatarContainerView.swift
-//  ShakerNotifications
+//  ShakerFeedbacks
 //
 //  Created by Andrew on 16.02.16.
 //  Copyright © 2016 Andrey. All rights reserved.
@@ -40,48 +40,24 @@ class SKAvatarContainerView: UIView {
         
         constrain(self.avatarButton) { avatarButton in
             guard let superview = avatarButton.superview else { return }
-            avatarButton.width == 35
-            avatarButton.height == 35
+            avatarButton.width == 44
+            avatarButton.height == 44
             avatarButton.top == superview.top
             avatarButton.left == superview.left
             avatarButton.right == superview.right
         }
         
         currentAvatarView = self.avatarButton
-        /*
-        for var i = 0; i < numberOfSubContainers; i++ {
-            
-            let imageView = self.configureImageView()
-            
-            addSubview(imageView)
-            sendSubviewToBack(imageView)
-            
-            do {
-                guard let currentAvatarView = currentAvatarView  else { continue }
-                
-                constrain(imageView, currentAvatarView) { avatarButton, currentAvatarView in
-                    guard let superview = avatarButton.superview else { return }
-                    avatarButton.width == currentAvatarView.width
-                    avatarButton.height == currentAvatarView.height
-                    avatarButton.top == currentAvatarView.top + 3
-                    avatarButton.left == currentAvatarView.left
-                    avatarButton.bottom == superview.bottom ~ UILayoutPriority(900 + i)
-                }
-            }
-            
-            currentAvatarView = imageView
-        }*/
+        //TODO Delete
+//      avatarButton.bottom == superview.bottom ~ UILayoutPriority(900 + i)
         
         iconImageView = self.configureIconImageView()
         addSubview(iconImageView)
         bringSubviewToFront(iconImageView)
         
         constrain(avatarButton, iconImageView) { avatarButton, iconImageView in
-            //            guard let superview = iconImageView.superview else { return }
-            
             iconImageView.width == 15
-            iconImageView.height == 15
-            
+            iconImageView.height == 15            
             iconImageView.bottom == avatarButton.bottom
             iconImageView.right == avatarButton.right
         }
@@ -94,7 +70,7 @@ class SKAvatarContainerView: UIView {
         self.avatarButton.setImage(defaultImage, forState: .Normal)
         self.avatarButton.setTitle("", forState: .Normal)
         self.avatarButton.backgroundColor = UIColor.lightGrayColor()
-        self.avatarButton.layer.cornerRadius = 16.5
+        self.avatarButton.layer.cornerRadius = 22
         self.avatarButton.layer.borderWidth = 1
         self.avatarButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.avatarButton.layer.masksToBounds = true
@@ -139,33 +115,28 @@ class SKAvatarContainerView: UIView {
     
     // MARK: - UIView update -
     func reset() {
-        
         self.avatarButton.setImage(defaultImage, forState: .Normal)
-        /*
-        let subviews = self.subviews
-        
-        for view in subviews {
-            if let view = view as? UIImageView where view !== iconImageView {
-                view.image = defaultImage
-                view.hidden = true
-            } else if let button = view as? UIButton {
-                button.setImage(defaultImage, forState: .Normal)
-            }
-        }
-        */
     }
     
-    func reload(data: SKBaseActivities) {
-        guard let user_avatar = data.user_avatar?.url else { return }
-        
-        switch data.activityType {
+    func reload(data: SKBaseFeedback) {
+        // задаем иконки
+        switch data.feedbackType {
         case .Profile:
             iconImageView.image = UIImage(named: "notification.icon.profile")
         case .Like:
             iconImageView.image = UIImage(named: "notification.icon.like")
+        case .Comment:
+            iconImageView.image = UIImage(named: "notification.icon.comment")
+        case .Repost:
+            iconImageView.image = UIImage(named: "notification.icon.repost")
+        case .Mention:
+            iconImageView.image = UIImage(named: "notification.icon.mention")
         default:
             iconImageView.image = nil
         }
+        
+        // хадаем аватарки
+        guard let user_avatar = data.user_avatar?.url else { return }
         
         self.imageTimestamp = NSDate().timeIntervalSince1970
         let imageTimestamp = self.imageTimestamp
@@ -180,29 +151,6 @@ class SKAvatarContainerView: UIView {
                 self?.avatarButton.setImage(image, forState: .Normal)
             }
         }
-
-        /*
-        let subviews = self.subviews
-
-        var imageIndex = 0
-        
-        for view in subviews.reverse() {
-            guard imageIndex < images.count else { break }
-            let image = images[imageIndex]
-            
-            if let view = view as? UIButton {
-                view.imageView?.imageFromUrl(user_avatar)
-                view.setImage(UIImage(named: user_avatar), forState: .Normal)
-            }
-            else if let view = view as? UIImageView where view !== iconImageView {
-                view.hidden = false
-                view.image = UIImage(named: image)
-            } else {
-                continue
-            }
-        
-            imageIndex++
-        }*/
     }
     
 }

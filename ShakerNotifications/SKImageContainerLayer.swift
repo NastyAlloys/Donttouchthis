@@ -104,6 +104,7 @@ class SKImageContainerLayer: CALayer {
         var axisX: CGFloat = 0
         var j = 0
         
+//print("SELFBOUNDS \(self.bounds)")
         for _ in 0..<maxCount {
             if currentWidth + width + 15 >= self.bounds.width {
                 currentWidth = 0
@@ -116,9 +117,9 @@ class SKImageContainerLayer: CALayer {
             
             j += 1
             
-            print("currentwidth: \(currentWidth)")
-            print("axisY: \(axisY)")
-            print("axisX: \(axisX)")
+//            print("currentwidth: \(currentWidth)")
+//            print("axisY: \(axisY)")
+//            print("axisX: \(axisX)")
             
             let avatarLayer = CALayer()
             avatarLayer.backgroundColor = UIColor.groupTableViewBackgroundColor().CGColor
@@ -128,11 +129,12 @@ class SKImageContainerLayer: CALayer {
             avatarLayer.masksToBounds = true
             avatarLayer.hidden = true
             avatarLayer.drawsAsynchronously = true
+            avatarLayer.contents = UIImage(named: "icon-notify-like")?.CGImage
             
 //            print("avatarLayerFrame: \(avatarLayer.frame)")
             
             self.addSublayer(avatarLayer)
-            print("FRAMEMEME \(self.frame)")
+//            print("FRAMEMEME \(self.frame)")
             currentWidth += avatarLayer.frame.width
             
         }
