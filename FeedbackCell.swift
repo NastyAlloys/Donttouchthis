@@ -80,12 +80,12 @@ class FeedbackCell: UITableViewCell {
             
             avatarView.left == superview.left + 10
             avatarView.top == superview.top + 10
-            avatarView.bottom >= superview.bottom - 10 ~ UILayoutPriority(900)
+            avatarView.bottom == superview.bottom - 10 ~ 900
             
             descriptionView.top == superview.top + 10
             descriptionView.left == avatarView.right + 10
             descriptionView.right == superview.right - 10
-            descriptionView.bottom >= superview.bottom - 10 ~ UILayoutPriority(900)
+            descriptionView.bottom == superview.bottom - 10 ~ 900
             
         }
         
