@@ -38,9 +38,6 @@ class ProfileDescriptionView: DescriptionView {
                 setHiddenButtonConstraints()
             }
         }
-        
-//        viewHeight?.constant = descriptionLabel.frame.height + footerView.frame.height
-//        print(viewHeight!.constant)
     }
     
     private func localInit() {}

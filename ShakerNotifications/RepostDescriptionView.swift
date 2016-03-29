@@ -12,7 +12,6 @@ import Cartography
 
 class RepostDescriptionView: DescriptionView {
     private(set) var baseData: SKRepostFeedback!
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -30,6 +29,7 @@ class RepostDescriptionView: DescriptionView {
     }
     
     override func reload(data: SKBaseFeedback) {
+        super.reload(data)
         
         switch data.feedbackModelType {
         case .RepostQuote:
@@ -40,27 +40,36 @@ class RepostDescriptionView: DescriptionView {
             baseData = data as? SKRepostFeedback
         }
         
+        print(baseData.with_photo)
+        
         if data.with_photo == 1 {
-            
-            self.descriptionButton.backgroundColor = UIColor.lightGrayColor()
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-                guard let photos = self?.baseData.photos?[0] else { return }
-                
-                let imageUrl = NSURL(string: photos)
-                let imageData = NSData(contentsOfURL: imageUrl!)
-                let image: UIImage = UIImage(data: imageData!)!
-                
-                dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                    self?.descriptionButton.setImage(image, forState: .Normal)
-                    self?.descriptionButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
-                }
-            }
+            setVisibleButtonConstraints()
+        } else {
+            setHiddenButtonConstraints()
         }
         
-        viewHeight?.constant = descriptionLabel.bounds.height
+//        if baseData.with_photo == 1 {
+////            setVisibleButtonConstraints()
+//            self.descriptionButton.backgroundColor = UIColor.lightGrayColor()
+//            
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+//                guard let photos = self?.baseData.photos?[0] else { return }
+//                
+//                let imageUrl = NSURL(string: photos)
+//                let imageData = NSData(contentsOfURL: imageUrl!)
+//                let image: UIImage = UIImage(data: imageData!)!
+//                
+//                dispatch_async(dispatch_get_main_queue()) { [weak self] in
+//                    self?.descriptionButton.setImage(image, forState: .Normal)
+//                    self?.descriptionButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
+//                }
+//            }
+//        } else {
+//            setHiddenButtonConstraints()
+//        }
     }
     
     private func localInit() {
     }
 }
+

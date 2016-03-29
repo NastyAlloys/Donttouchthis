@@ -42,7 +42,8 @@ class CommentDescriptionView: DescriptionView {
             baseData = data as? SKCommentFeedback
         }
         
-        if data.with_photo == 1 {
+        if baseData.with_photo == 1 {
+            setVisibleButtonConstraints()
             
             self.descriptionButton.backgroundColor = UIColor.lightGrayColor()
             
@@ -59,16 +60,13 @@ class CommentDescriptionView: DescriptionView {
                 }
             }
         } else {
-            constrain(self.descriptionLabel) { label in
-                guard let superview = label.superview else { return }
-                
-                label.right == superview.right
-            }
+            setHiddenButtonConstraints()
         }
         
-        viewHeight?.constant = descriptionLabel.bounds.height
+//        viewHeight?.constant = descriptionLabel.bounds.height
     }
     
     private func localInit() {
     }
 }
+

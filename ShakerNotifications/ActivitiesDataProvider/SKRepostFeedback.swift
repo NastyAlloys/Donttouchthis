@@ -10,7 +10,7 @@ import SwiftyJSON
 import UIKit
 
 /*
-    Class, отвечающий за нотификации по моим публикациям/репостам
+    Class, отвечающий за нотификации по моим репостам
 */
 class SKRepostFeedback: SKBaseFeedback {
     
@@ -22,10 +22,6 @@ class SKRepostFeedback: SKBaseFeedback {
     private(set) var text: String? = ""
     private(set) var is_repost: Bool? = false
     
-}
-
-class SKRepostPublicationFeedback: SKRepostFeedback {
-    
     required init(json: JSON) {
         super.init(json: json)
         
@@ -36,6 +32,21 @@ class SKRepostPublicationFeedback: SKRepostFeedback {
         self.is_mine = json["body"]["is_mine"].boolValue
         self.text = json["body"]["text"].stringValue
         self.is_repost = json["body"]["is_repost"].boolValue
+    }
+}
+
+class SKRepostPublicationFeedback: SKRepostFeedback {
+    
+    required init(json: JSON) {
+        super.init(json: json)
+        
+//        self.id = json["body"]["id"].stringValue
+//        self.photos = json["body"]["photos"].arrayObject as? [String]
+//        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.text = json["body"]["text"].stringValue
+//        self.is_repost = json["body"]["is_repost"].boolValue
     }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
@@ -83,11 +94,11 @@ class SKRepostQuoteFeedback: SKRepostFeedback {
         
     required init(json: JSON) {
         super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-        self.text = json["body"]["text"].stringValue
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.text = json["body"]["text"].stringValue
     }
     
     override var feedbackDescription: Lazy<NSAttributedString> {

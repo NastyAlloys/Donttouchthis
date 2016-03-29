@@ -312,8 +312,38 @@ class SKLikePublicationFeedback: SKLikeFeedback {
                     }
                     
                 } else {
-                    let plurPubString = pluralize(self.count!, form_for_1: " публикация", form_for_2: " публикации", form_for_5: " публикаций")
-                    userAttributedString.appendAttributedString(NSAttributedString(string: " нравится \(self.count!) \(plurPubString)"))
+                    if self.with_photo > 0 {
+                        let plurPubString = pluralize(self.count!, form_for_1: "публикация", form_for_2: "публикации", form_for_5: "публикаций")
+                        userAttributedString.appendAttributedString(NSAttributedString(string: " нравится \(self.count!) \(plurPubString)"))
+                    } else {
+                        // генерируем строку пользователей, которым понравилась цитата
+                        let additionalUsers = self.user_others
+                        
+                        let usersString = self.generateSeparatedUserString(self.user_names, userIds: self.user_ids, userOthers: additionalUsers)
+                        userAttributedString.appendAttributedString(usersString)
+                        
+                        // дозаписываем в строку количество остальных пользователей
+                        if additionalUsers > 0 {
+                            let pluralizedUsersString = pluralize(additionalUsers, form_for_1: " пользователь", form_for_2: " пользователям", form_for_5: " пользователей")
+                            userAttributedString.appendAttributedString(NSAttributedString(string: pluralizedUsersString))
+                        }
+                        
+                        // генерируем связующий глагол и меняем его цвет
+                        let text = " нравится публикация "
+                        let coloredText = self.setAttributedStringColor(text, color: UIColor.lightGrayColor())
+                        userAttributedString.appendAttributedString(coloredText)
+                        
+                        let ownerUrl = NSURL(string: "shaker://user/\(self.owner_id)")!
+                        userAttributedString.appendAttributedString(
+                            NSAttributedString(string: self.owner_name,
+                                attributes: [
+                                    NSLinkAttributeName : ownerUrl,
+                                    NSUnderlineStyleAttributeName : NSUnderlineStyle.StyleNone.rawValue
+                                ]
+                            )
+                        )
+                        
+                    }
                 }
                 
                 return userAttributedString

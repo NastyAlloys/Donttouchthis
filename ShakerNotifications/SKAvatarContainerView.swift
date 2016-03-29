@@ -45,6 +45,9 @@ class SKAvatarContainerView: UIView {
             avatarButton.top == superview.top
             avatarButton.left == superview.left
             avatarButton.right == superview.right
+            avatarButton.bottom == superview.bottom
+//            superview.height == avatarButton.height
+            superview.width == avatarButton.width
         }
         
         currentAvatarView = self.avatarButton
@@ -95,22 +98,6 @@ class SKAvatarContainerView: UIView {
         iconImageView.tag = 10
         
         return iconImageView
-    }
-    
-    private func configureImageView() -> UIImageView {
-        let imageView = UIImageView()
-        
-//        imageView.image = defaultImage
-        imageView.backgroundColor = UIColor.lightGrayColor()
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
-        imageView.layer.shouldRasterize = true
-        imageView.layer.rasterizationScale = UIScreen.mainScreen().scale
-        imageView.layer.cornerRadius = 16.5
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.whiteColor().CGColor
-        
-        return imageView
     }
     
     // MARK: - UIView update -

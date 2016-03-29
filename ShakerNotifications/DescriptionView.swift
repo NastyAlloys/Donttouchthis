@@ -17,9 +17,6 @@ class DescriptionView: UIView {
     private(set) var descriptionButton: UIButton!
     private(set) var descriptionLabel: TTTAttributedLabel!
     var viewHeight: NSLayoutConstraint?
-    var buttonWidth: NSLayoutConstraint?
-    var buttonHeight: NSLayoutConstraint?
-    var labelRight: NSLayoutConstraint?
     
     // MARK: - Initialization -
     override init(frame: CGRect) {
@@ -63,11 +60,8 @@ class DescriptionView: UIView {
             footer.right == superview.right
             footer.height == 15
             
-            label.bottom == footer.top
-            
-//            viewHeight = (superview.height == 10)
+            label.bottom == footer.top ~ 800
         }
-
     }
     
     // MARK: - UIView update -
@@ -124,7 +118,7 @@ class DescriptionView: UIView {
         constrain(self.descriptionButton, self.descriptionLabel) { button, label in
             guard let superview = label.superview else { return }
             
-            label.right == superview.right - 15
+            label.right == superview.right
         }
         
     }

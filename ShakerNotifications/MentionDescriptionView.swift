@@ -29,6 +29,7 @@ class MentionDescriptionView: DescriptionView {
     }
     
     override func reload(data: SKBaseFeedback) {
+        super.reload(data)
         
         switch data.feedbackModelType {
         case .MentionComment:
@@ -39,7 +40,9 @@ class MentionDescriptionView: DescriptionView {
             baseData = data as? SKMentionFeedback
         }
         
-        if data.with_photo == 1 {
+        if baseData.with_photo == 1 {
+            setVisibleButtonConstraints()
+            
             self.descriptionButton.backgroundColor = UIColor.lightGrayColor()
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
@@ -54,20 +57,14 @@ class MentionDescriptionView: DescriptionView {
                     self?.descriptionButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
                 }
             }
+        } else {
+            setHiddenButtonConstraints()
         }
         
-        viewHeight?.constant = descriptionLabel.bounds.height
+        //        viewHeight?.constant = descriptionLabel.bounds.height
     }
     
     private func localInit() {
-        constrain(self.descriptionLabel) { descriptionLabel in
-            guard let superview = descriptionLabel.superview else { return }
-            
-            descriptionLabel.top == superview.top
-            descriptionLabel.left == superview.left
-            descriptionLabel.right == superview.right
-            descriptionLabel.bottom == superview.bottom
-            viewHeight = (superview.height == descriptionLabel.height ~ 100)
-        }
     }
 }
+

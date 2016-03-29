@@ -67,7 +67,6 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cellData = self.dataFromJSON[indexPath.row]
         let type = cellData.feedbackType
         let subtype = SKActivitiesSubtype(string: cellData.feedbackSubtype)
@@ -92,9 +91,8 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-
         let cellData = self.dataFromJSON[indexPath.row]
-                
+                            print(indexPath.row)
         if let cell = cell as? ProfileFeedbackCell {
             cell.reload(cellData)
         } else if let cell = cell as? LikeFeedbackCell {

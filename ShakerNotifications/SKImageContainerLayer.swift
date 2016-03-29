@@ -35,13 +35,13 @@ class SKImageContainerLayer: CALayer {
     */
     func displayImages(count count: Int, clear: Bool, layerSetupBlock: ((index: Int, layer: CALayer) -> ()) ) {
         guard let sublayers = self.sublayers else { return }
+        
         for (index, avatarLayer) in sublayers.enumerate() where
             avatarLayer.frame.maxX <= self.frame.width {
-//                print("avatar: \(avatarLayer.frame.maxX)")
-//                print("frame: \(self.frame.width)")
                 if clear {
                     avatarLayer.contents = nil
                 }
+                
                 if index < count {
                     avatarLayer.hidden = false
                     layerSetupBlock(index: index, layer: avatarLayer)
@@ -104,9 +104,8 @@ class SKImageContainerLayer: CALayer {
         var axisX: CGFloat = 0
         var j = 0
         
-//print("SELFBOUNDS \(self.bounds)")
         for _ in 0..<maxCount {
-            if currentWidth + width + 15 >= self.bounds.width {
+            if currentWidth + width >= self.bounds.width {
                 currentWidth = 0
                 axisX = 0
                 axisY += size.height + offset
@@ -117,10 +116,6 @@ class SKImageContainerLayer: CALayer {
             
             j += 1
             
-//            print("currentwidth: \(currentWidth)")
-//            print("axisY: \(axisY)")
-//            print("axisX: \(axisX)")
-            
             let avatarLayer = CALayer()
             avatarLayer.backgroundColor = UIColor.groupTableViewBackgroundColor().CGColor
             avatarLayer.contentsGravity = kCAGravityResizeAspectFill
@@ -129,12 +124,8 @@ class SKImageContainerLayer: CALayer {
             avatarLayer.masksToBounds = true
             avatarLayer.hidden = true
             avatarLayer.drawsAsynchronously = true
-            avatarLayer.contents = UIImage(named: "icon-notify-like")?.CGImage
-            
-//            print("avatarLayerFrame: \(avatarLayer.frame)")
             
             self.addSublayer(avatarLayer)
-//            print("FRAMEMEME \(self.frame)")
             currentWidth += avatarLayer.frame.width
             
         }
