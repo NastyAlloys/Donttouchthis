@@ -40,8 +40,8 @@ class SKAvatarContainerView: UIView {
         
         constrain(self.avatarButton) { avatarButton in
             guard let superview = avatarButton.superview else { return }
-            avatarButton.width == 44
-            avatarButton.height == 44
+            avatarButton.width == FeedbackConstants.AvatarSize.width
+            avatarButton.height == FeedbackConstants.AvatarSize.height
             avatarButton.top == superview.top
             avatarButton.left == superview.left
             avatarButton.right == superview.right
@@ -59,8 +59,8 @@ class SKAvatarContainerView: UIView {
         bringSubviewToFront(iconImageView)
         
         constrain(avatarButton, iconImageView) { avatarButton, iconImageView in
-            iconImageView.width == 15
-            iconImageView.height == 15            
+            iconImageView.width == FeedbackConstants.IconSize.width
+            iconImageView.height == FeedbackConstants.IconSize.height
             iconImageView.bottom == avatarButton.bottom
             iconImageView.right == avatarButton.right
         }

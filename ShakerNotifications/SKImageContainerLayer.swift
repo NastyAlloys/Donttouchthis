@@ -105,7 +105,7 @@ class SKImageContainerLayer: CALayer {
         var j = 0
         
         for _ in 0..<maxCount {
-            if currentWidth + width >= self.bounds.width {
+            if currentWidth + width >= bounds.width {
                 currentWidth = 0
                 axisX = 0
                 axisY += size.height + offset
@@ -126,7 +126,7 @@ class SKImageContainerLayer: CALayer {
             avatarLayer.drawsAsynchronously = true
             
             self.addSublayer(avatarLayer)
-            currentWidth += avatarLayer.frame.width
+            currentWidth += width
             
         }
     }

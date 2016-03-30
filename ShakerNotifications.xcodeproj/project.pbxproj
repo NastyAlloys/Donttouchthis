@@ -26,6 +26,7 @@
 		498342AE1C772F0900BB7F3B /* ProfileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */; };
 		49851CC01C842CF700D0E104 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49851CBF1C842CF700D0E104 /* Extensions.swift */; };
 		5582C5D41CA303DE00985FAF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5582C5D31CA303DE00985FAF /* NotificationsViewController.swift */; };
+		55BBBE3D1CAC34AF006E767D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBBE3C1CAC34AF006E767D /* Constants.swift */; };
 		55BF420D1CA3E78000882DBC /* SKBaseFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF42031CA3E78000882DBC /* SKBaseFeedback.swift */; };
 		55BF420E1CA3E78000882DBC /* SKCommentFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF42041CA3E78000882DBC /* SKCommentFeedback.swift */; };
 		55BF42101CA3E78000882DBC /* SKMentionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF42061CA3E78000882DBC /* SKMentionFeedback.swift */; };
@@ -88,6 +89,7 @@
 		498342AD1C772F0900BB7F3B /* ProfileDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionView.swift; sourceTree = "<group>"; };
 		49851CBF1C842CF700D0E104 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5582C5D31CA303DE00985FAF /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		55BBBE3C1CAC34AF006E767D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		55BF42031CA3E78000882DBC /* SKBaseFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKBaseFeedback.swift; sourceTree = "<group>"; };
 		55BF42041CA3E78000882DBC /* SKCommentFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKCommentFeedback.swift; sourceTree = "<group>"; };
 		55BF42061CA3E78000882DBC /* SKMentionFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKMentionFeedback.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				490B1C341C6B443D00266E87 /* Assets.xcassets */,
 				490B1C361C6B443D00266E87 /* LaunchScreen.storyboard */,
 				490B1C391C6B443D00266E87 /* Info.plist */,
+				55BBBE3C1CAC34AF006E767D /* Constants.swift */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				55BF42291CA4490900882DBC /* LikeDescriptionView.swift in Sources */,
 				55BF421D1CA4069900882DBC /* RepostFeedbackCell.swift in Sources */,
 				5582C5D41CA303DE00985FAF /* NotificationsViewController.swift in Sources */,
+				55BBBE3D1CAC34AF006E767D /* Constants.swift in Sources */,
 				498342AE1C772F0900BB7F3B /* ProfileDescriptionView.swift in Sources */,
 				55BF42211CA4072800882DBC /* MentionDescriptionView.swift in Sources */,
 				55BF42251CA4326600882DBC /* SKLikeFeedback.swift in Sources */,

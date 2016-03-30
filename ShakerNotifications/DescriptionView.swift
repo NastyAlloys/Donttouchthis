@@ -10,13 +10,15 @@ import UIKit
 import Cartography
 import TTTAttributedLabel
 
-class DescriptionView: UIView {
+class DescriptionView: UIView, UIGestureRecognizerDelegate {
     // MARK: Properties
     var footerView: SKFooterContainerView!
     private(set) var descriptionData: SKBaseFeedback!
     private(set) var descriptionButton: UIButton!
     private(set) var descriptionLabel: TTTAttributedLabel!
     var viewHeight: NSLayoutConstraint?
+    var labelSuperviewTrailing: NSLayoutConstraint?
+    var labelButtonTrailing: NSLayoutConstraint?
     
     // MARK: - Initialization -
     override init(frame: CGRect) {
@@ -58,9 +60,17 @@ class DescriptionView: UIView {
             footer.bottom == superview.bottom
             footer.left == superview.left
             footer.right == superview.right
-            footer.height == 15
+            footer.height == FeedbackConstants.FooterSize.height
             
             label.bottom == footer.top ~ 800
+            
+            button.height == FeedbackConstants.ButtonSize.height
+            button.width == FeedbackConstants.ButtonSize.width
+            
+            button.top == superview.top
+            button.right == superview.right - 15
+            labelSuperviewTrailing = (label.right == button.left - 10 ~ 900)
+            labelButtonTrailing = (label.right == superview.right ~ 100)
         }
     }
     
@@ -87,6 +97,17 @@ class DescriptionView: UIView {
         self.descriptionLabel.textColor = UIColor.lightGrayColor()
         self.descriptionLabel.numberOfLines = 0
         self.descriptionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.descriptionLabel.userInteractionEnabled = true
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: "nonLinkedPartOfLabelWasTapped:")
+        tap.cancelsTouchesInView = false
+        tap.delegate = self
+        self.descriptionLabel.addGestureRecognizer(tap)
+        
+        descriptionLabel.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+        self.descriptionLabel.extendsLinkTouchArea = false
+        
 //        descriptionLabel.setContentHuggingPriority(1000, forAxis: UILayoutConstraintAxis.Horizontal)
 //        descriptionLabel.setContentCompressionResistancePriority(500, forAxis: UILayoutConstraintAxis.Horizontal)
     }
@@ -102,34 +123,48 @@ class DescriptionView: UIView {
     }
     
     func setVisibleButtonConstraints() {
-        constrain(self.descriptionButton, self.descriptionLabel) { button, label in
-            guard let superview = label.superview else { return }
-            
-            button.height == 42
-            button.width == 42
-            
-            button.top == superview.top
-            button.right == superview.right - 15
-            label.right == button.left - 10
-        }
+        self.descriptionButton.hidden = false
+        labelSuperviewTrailing?.priority = 900
+        labelButtonTrailing?.priority = 100
     }
     
     func setHiddenButtonConstraints() {
-        constrain(self.descriptionButton, self.descriptionLabel) { button, label in
-            guard let superview = label.superview else { return }
-            
-            label.right == superview.right
-        }
-        
+        self.descriptionButton.hidden = true
+        labelSuperviewTrailing?.priority = 100
+        labelButtonTrailing?.priority = 900
     }
     
     func buttonDidTouch(sender: UIButton!) {}
+    
+    func nonLinkedPartOfLabelWasTapped(sender: AnyObject) {
+        
+//        print(sender)
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+//        print(touch.locationInView(self.descriptionLabel))
+        if gestureRecognizer.view == self.descriptionLabel {
+            return self.descriptionLabel.containslinkAtPoint(touch.locationInView(self.descriptionLabel))
+        }
+        
+        return true
+    }
 }
+
 
 extension DescriptionView: TTTAttributedLabelDelegate {
     
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        guard let url = url else { return }
-        UIApplication.sharedApplication().openURL(url)
+//    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+//        guard let url = url else { return }
+//        
+//        UIApplication.sharedApplication().openURL(url)
+//    }
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithTextCheckingResult result: NSTextCheckingResult!) {
+//        guard let url = url else { return }
+//        
+//        UIApplication.sharedApplication().openURL(url)
+        
+        print(result.numberOfRanges)
     }
 }

@@ -76,14 +76,14 @@ class FeedbackCell: UITableViewCell {
         constrain(avatarView, descriptionView) { avatarView, descriptionView in
             guard let superview = avatarView.superview else { return }
             
-            avatarView.left == superview.left + 10
-            avatarView.top == superview.top + 10
-            avatarView.bottom <= superview.bottom - 10 ~ 900
+            avatarView.left == superview.left + FeedbackConstants.Padding.avatarView
+            avatarView.top == superview.top + FeedbackConstants.Padding.avatarView
+            avatarView.bottom <= superview.bottom - FeedbackConstants.Padding.avatarView ~ 900
             
-            descriptionView.top == superview.top + 10
-            descriptionView.left == avatarView.right + 10
-            descriptionView.right == superview.right - 10
-            descriptionView.bottom <= superview.bottom - 10 ~ 900            
+            descriptionView.top == superview.top + FeedbackConstants.Padding.descriptionView
+            descriptionView.left == avatarView.right + FeedbackConstants.Padding.descriptionView
+            descriptionView.right == superview.right - FeedbackConstants.Padding.descriptionView
+            descriptionView.bottom <= superview.bottom - FeedbackConstants.Padding.descriptionView ~ 900            
         }
         
         self.descriptionView.setContentCompressionResistancePriority(900, forAxis: UILayoutConstraintAxis.Vertical)

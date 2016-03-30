@@ -278,7 +278,7 @@ class SKLikePublicationFeedback: SKLikeFeedback {
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
             return Lazy {
-                let userAttributedString = NSMutableAttributedString()
+                var userAttributedString = NSMutableAttributedString()
                 
                 let ownerUrl = NSURL(string: "shaker://user/\(self.user_ids[0])")!
                 userAttributedString.appendAttributedString(
@@ -317,6 +317,7 @@ class SKLikePublicationFeedback: SKLikeFeedback {
                         userAttributedString.appendAttributedString(NSAttributedString(string: " нравится \(self.count!) \(plurPubString)"))
                     } else {
                         // генерируем строку пользователей, которым понравилась цитата
+                        userAttributedString = NSMutableAttributedString()
                         let additionalUsers = self.user_others
                         
                         let usersString = self.generateSeparatedUserString(self.user_names, userIds: self.user_ids, userOthers: additionalUsers)

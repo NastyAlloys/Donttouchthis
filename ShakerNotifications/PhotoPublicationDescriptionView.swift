@@ -15,6 +15,7 @@ class PhotoPublicationDescriptionView: DescriptionView {
     private(set) var layerContainerView: UIView!
     private(set) var lines: Int = 1
     private(set) var layerContainerHeight: NSLayoutConstraint?
+    private(set) var tap: UITapGestureRecognizer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +54,8 @@ class PhotoPublicationDescriptionView: DescriptionView {
         self.setupLayerContainerView()
         self.setUpPublicationLayer()
         layerContainerView.layer.addSublayer(publicationLayer)
+        tap = UITapGestureRecognizer(target: self, action: Selector("layerDidTouch:"))
+        layerContainerView.addGestureRecognizer(tap)
     }
 
     override func reload(data: SKBaseFeedback) {
@@ -61,77 +64,13 @@ class PhotoPublicationDescriptionView: DescriptionView {
             publicationData = data
             
             if data.with_photo > 1 {
+                setHiddenButtonConstraints()
                 updatePublications()
             } else if data.with_photo == 1 {
+                setVisibleButtonConstraints()
                 updatePublication()
-            }
-        }
-    }
-    
-    // TODO make constants
-    private func setUpPublicationLayer() {
-        self.publicationLayer = SKImageContainerLayer()
-        self.publicationLayer.backgroundColor = UIColor.blueColor().CGColor
-        
-        var width: CGFloat = self.bounds.width
-        let screenRect = UIScreen.mainScreen().bounds
-        
-        width = screenRect.width - 45
-        publicationLayer.frame.size.width = width
-        
-        self.publicationLayer.setupLayerWithLines(size: CGSize(width: 42, height: 42), offset: 5, maxCount: 12)
-    }
-    
-    private func updatePublications() {
-        var currentWidth: CGFloat = 0
-        var currentHeight: CGFloat = 0
-        let count = self.publicationData.with_photo
-        lines = 1
-        
-        self.publicationLayer.displayImages(count: count, clear: false) { index, layer in
-            layer.contentsGravity = kCAGravityResizeAspect
-            layer.cornerRadius = 0.8
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-                guard let photos = self?.publicationData.photos?[0] else { return }
-                
-                let imageUrl = NSURL(string: photos)
-                let imageData = NSData(contentsOfURL: imageUrl!)
-                let image: UIImage = UIImage(data: imageData!)!
-                
-                dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                    self?.layer.contents = image.CGImage
-                }
-            }
-            
-            currentWidth += 42
-            
-            if currentWidth >= self.publicationLayer.bounds.width {
-                self.lines += 1
-                currentWidth = 0
-            }
-        }
-        
-        // todo make constants
-        currentHeight = CGFloat((42 * lines) + 5)
-        layerContainerHeight!.constant = currentHeight
-    }
-    
-    private func updatePublication() {
-        setVisibleButtonConstraints()
-        
-        self.descriptionButton.backgroundColor = UIColor.lightGrayColor()
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-            guard let photos = self?.publicationData.photos?[0] else { return }
-            
-            let imageUrl = NSURL(string: photos)
-            let imageData = NSData(contentsOfURL: imageUrl!)
-            let image: UIImage = UIImage(data: imageData!)!
-            
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                self?.descriptionButton.setImage(image, forState: .Normal)
-                self?.descriptionButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
+            } else {
+                setHiddenButtonConstraints()
             }
         }
     }
@@ -158,14 +97,89 @@ class PhotoPublicationDescriptionView: DescriptionView {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let p: CGPoint = touches.first!.locationInView(self)
-        for layer: CALayer in self.publicationLayer.sublayers! {
-            if layer.containsPoint(self.publicationLayer.convertPoint(p, toLayer: layer)) {
-                if layer.hidden != true {
-//                let publicationSourceUrl = NSURL(string: "shaker://interestSource/\(interestData.interest_id)")!
-//                UIApplication.sharedApplication().openURL(interestSourceUrl)
-                    print("нажали на картиночку")
+    private func setUpPublicationLayer() {
+        self.publicationLayer = SKImageContainerLayer()
+        self.publicationLayer.backgroundColor = UIColor.blueColor().CGColor
+        
+        let screenRect = UIScreen.mainScreen().bounds
+        let indent = FeedbackConstants.Padding.avatarView + FeedbackConstants.AvatarSize.width + FeedbackConstants.Padding.descriptionView
+        let width = screenRect.width - indent
+        publicationLayer.frame.size.width = width
+        
+        let size = CGSize(width: FeedbackConstants.Layer.width, height: FeedbackConstants.Layer.height)
+        
+        self.publicationLayer.setupLayerWithLines(size: size, offset: FeedbackConstants.Layer.offset, maxCount: 12)
+    }
+    
+    private func updatePublications() {
+        var currentWidth: CGFloat = 0
+        var currentHeight: CGFloat = 0
+        let count = self.publicationData.with_photo
+
+        lines = 1
+        
+        self.publicationLayer.displayImages(count: count, clear: false) { index, layer in
+            layer.contentsGravity = kCAGravityResizeAspect
+            layer.cornerRadius = 0.8
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+                guard let photos = self?.publicationData.photos?[index] else { return }
+                guard let photo_ids = self?.publicationData.photo_ids?[index] else { return }
+                
+                let imageUrl = NSURL(string: photos)
+                let imageData = NSData(contentsOfURL: imageUrl!)
+                let image: UIImage = UIImage(data: imageData!)!
+                
+                dispatch_async(dispatch_get_main_queue()) { [weak layer] in
+                    layer!.contents = image.CGImage
+                    layer!.name = photo_ids
+                }
+            }
+
+            currentWidth += FeedbackConstants.AvatarSize.width + FeedbackConstants.Layer.offset
+            
+            if currentWidth >= self.publicationLayer.bounds.width {
+                self.lines += 1
+                currentWidth = 0
+            }
+        }
+
+        currentHeight = CGFloat((FeedbackConstants.AvatarSize.height * CGFloat(lines)) + FeedbackConstants.Layer.offset)
+        layerContainerHeight!.constant = currentHeight
+    }
+    
+    private func updatePublication() {
+        setVisibleButtonConstraints()
+        
+        self.descriptionButton.backgroundColor = UIColor.lightGrayColor()
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+            guard let photos = self?.publicationData.photos?[0] else { return }
+            
+            let imageUrl = NSURL(string: photos)
+            let imageData = NSData(contentsOfURL: imageUrl!)
+            let image: UIImage = UIImage(data: imageData!)!
+            
+            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                self?.descriptionButton.setImage(image, forState: .Normal)
+                self?.descriptionButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
+            }
+        }
+    }
+    
+    func layerDidTouch(recognizer: UITapGestureRecognizer) {
+        let touchLocation = recognizer.locationInView(recognizer.view)
+        guard let sublayers = self.publicationLayer.sublayers else { return }
+        
+        if recognizer.state == UIGestureRecognizerState.Ended {
+            
+            for sublayer in sublayers {
+                if let touchedLayer: CALayer = sublayer.hitTest(touchLocation) {
+                    guard let photo_id = touchedLayer.name else { return }
+                    print(touchedLayer.name)
+                    
+                    let publicationSourceUrl = NSURL(string: "http://google.com/\(photo_id)")!
+                    UIApplication.sharedApplication().openURL(publicationSourceUrl)
                 }
             }
         }
