@@ -11,9 +11,6 @@ import Cartography
 
 class LikeDescriptionView: DescriptionView {
     private(set) var baseData: SKLikeFeedback!
-    private(set) var rightSideConstraint: NSLayoutConstraint?
-    
-    let group = ConstraintGroup()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,23 +28,7 @@ class LikeDescriptionView: DescriptionView {
         super.reset()
     }
     
-    private func localInit() {
-        /*
-        constrain(self.descriptionLabel, self.descriptionButton) { descriptionLabel, descriptionButton in
-            guard let superview = descriptionLabel.superview else { return }
-            
-            descriptionLabel.top == superview.top
-            descriptionLabel.left == superview.left
-            
-            viewHeight = (superview.height == 100 ~ 100)
-        }
-        
-        constrain(self.descriptionLabel, replace: group) { descriptionLabel in
-            guard let superview = descriptionLabel.superview else { return }
-//            descriptionLabel.right == superview.right - 10
-        }
-        */
-    }
+    private func localInit() { }
     
     override func reload(data: SKBaseFeedback) {
         super.reload(data)
@@ -63,11 +44,8 @@ class LikeDescriptionView: DescriptionView {
             baseData = data as? SKLikeFeedback
         }
         
-        var height: CGFloat = 0
-        
         if baseData.photos == nil {
             setHiddenButtonConstraints()
-            height = descriptionLabel.frame.height
         } else {
             setVisibleButtonConstraints()
             
@@ -90,11 +68,7 @@ class LikeDescriptionView: DescriptionView {
                 self.descriptionButton.setImage(UIImage(named: ""), forState: .Normal)
                 self.descriptionButton.imageView?.contentMode = UIViewContentMode.Center
             }
-            
-            height = descriptionLabel.frame.height > descriptionButton.frame.height ? descriptionLabel.frame.height : descriptionButton.frame.height
         }
-        
-//        viewHeight?.constant = height
     }
     
     // TODO : Сделать метод для перехода в публикацию шейка.

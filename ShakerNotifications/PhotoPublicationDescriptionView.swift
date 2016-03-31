@@ -119,7 +119,7 @@ class PhotoPublicationDescriptionView: DescriptionView {
         lines = 1
         
         self.publicationLayer.displayImages(count: count, clear: false) { index, layer in
-            layer.contentsGravity = kCAGravityResizeAspect
+//            layer.contentsGravity = kCAGravityResizeAspect
             layer.cornerRadius = 0.8
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
@@ -130,9 +130,9 @@ class PhotoPublicationDescriptionView: DescriptionView {
                 let imageData = NSData(contentsOfURL: imageUrl!)
                 let image: UIImage = UIImage(data: imageData!)!
                 
-                dispatch_async(dispatch_get_main_queue()) { [weak layer] in
-                    layer!.contents = image.CGImage
-                    layer!.name = photo_ids
+                dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                    layer.contents = image.CGImage
+                    layer.name = photo_ids
                 }
             }
 

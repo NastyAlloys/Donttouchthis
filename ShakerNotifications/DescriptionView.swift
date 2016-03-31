@@ -83,7 +83,6 @@ class DescriptionView: UIView, UIGestureRecognizerDelegate {
         self.footerView.reload(data)
         
         descriptionLabel.setText(data.feedbackDescription.value)
-//        descriptionLabel.sizeToFit()
     }
     
     private func setUpDescriptionLabel() {

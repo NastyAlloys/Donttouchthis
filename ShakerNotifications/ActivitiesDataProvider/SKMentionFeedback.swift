@@ -41,7 +41,6 @@ class SKMentionFeedback: SKBaseFeedback {
     private(set) var photo_ids: [String]? = []
     private(set) var comment_text: String? = ""
     private(set) var address: String? = ""
-//    private(set) var mention_subtype: MentionSubtype?    
     private(set) var mention_subtype: String? = ""
     
     required init(json: JSON) {
@@ -55,7 +54,6 @@ class SKMentionFeedback: SKBaseFeedback {
         self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
         self.comment_text = json["body"]["comment_text"].stringValue
         self.address = json["body"]["address"].stringValue
-//        self.mention_subtype = MentionSubtype(json: json["mention_subtype"])
         self.mention_subtype = json["mention_subtype"].stringValue
     }
     
@@ -63,14 +61,14 @@ class SKMentionFeedback: SKBaseFeedback {
 
 class SKMentionPublicationFeedback: SKMentionFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
 //        self.id = json["body"]["id"].stringValue
 //        self.count = json["body"]["count"].intValue
 //        self.is_mine = json["body"]["is_mine"].boolValue
 //        self.text = json["body"]["text"].stringValue
-    }
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -108,9 +106,9 @@ class SKMentionPublicationFeedback: SKMentionFeedback {
 
 class SKMentionCommentFeedback: SKMentionFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
 //        self.id = json["body"]["id"].stringValue
 //        self.count = json["body"]["count"].intValue
 //        self.photos = json["body"]["photos"].arrayObject as? [String]
@@ -118,7 +116,7 @@ class SKMentionCommentFeedback: SKMentionFeedback {
 //        self.is_mine = json["body"]["is_mine"].boolValue
 //        self.comment_text = json["body"]["comment_text"].stringValue
 //        self.address = json["body"]["address"].stringValue
-    }
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {

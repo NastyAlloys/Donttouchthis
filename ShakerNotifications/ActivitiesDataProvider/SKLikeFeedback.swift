@@ -32,21 +32,23 @@ class SKLikeFeedback: SKBaseFeedback {
         self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
         self.count = json["body"]["count"].intValue
         self.is_mine = json["body"]["is_mine"].boolValue
+        self.address = json["body"]["address"].stringValue
+        self.is_repost = json["body"]["is_repost"].boolValue
     }
 }
 
 class SKLikeInterestFeedback: SKLikeFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.text = json["body"]["text"].stringValue
-        self.photos = json["body"]["photos"].arrayObject as? [String]
-        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-    }
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.text = json["body"]["text"].stringValue
+//        self.photos = json["body"]["photos"].arrayObject as? [String]
+//        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -111,14 +113,14 @@ class SKLikeInterestFeedback: SKLikeFeedback {
 
 class SKLikeShakeFeedback: SKLikeFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-        self.address = json["body"]["address"].stringValue
-    }
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.address = json["body"]["address"].stringValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -179,16 +181,16 @@ class SKLikeShakeFeedback: SKLikeFeedback {
 
 class SKLikeQuoteFeedback: SKLikeFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.text = json["body"]["text"].stringValue
-        self.photos = json["body"]["photos"].arrayObject as? [String]
-        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-    }
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.text = json["body"]["text"].stringValue
+//        self.photos = json["body"]["photos"].arrayObject as? [String]
+//        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -263,17 +265,17 @@ class SKLikeQuoteFeedback: SKLikeFeedback {
 
 class SKLikePublicationFeedback: SKLikeFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.photos = json["body"]["photos"].arrayObject as? [String]
-        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-        self.is_repost = json["body"]["is_repost"].boolValue
-        self.text = json["body"]["text"].stringValue
-    }
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.photos = json["body"]["photos"].arrayObject as? [String]
+//        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.is_repost = json["body"]["is_repost"].boolValue
+//        self.text = json["body"]["text"].stringValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {

@@ -23,10 +23,6 @@ class SKCommentFeedback: SKBaseFeedback {
     private(set) var comment_text: String? = ""
     private(set) var address: String? = ""
     
-}
-
-class SKCommentQuoteFeedback: SKCommentFeedback {
-    
     required init(json: JSON) {
         super.init(json: json)
         
@@ -37,7 +33,25 @@ class SKCommentQuoteFeedback: SKCommentFeedback {
         self.is_mine = json["body"]["is_mine"].boolValue
         self.text = json["body"]["text"].stringValue
         self.comment_text = json["body"]["comment_text"].stringValue
+        self.address = json["body"]["address"].stringValue
+
     }
+
+}
+
+class SKCommentQuoteFeedback: SKCommentFeedback {
+    
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.photos = json["body"]["photos"].arrayObject as? [String]
+//        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.text = json["body"]["text"].stringValue
+//        self.comment_text = json["body"]["comment_text"].stringValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -91,15 +105,15 @@ class SKCommentQuoteFeedback: SKCommentFeedback {
 
 class SKCommentPublicationFeedback: SKCommentFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-        self.text = json["body"]["text"].stringValue
-        self.comment_text = json["body"]["comment_text"].stringValue
-    }
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.text = json["body"]["text"].stringValue
+//        self.comment_text = json["body"]["comment_text"].stringValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -152,15 +166,15 @@ class SKCommentPublicationFeedback: SKCommentFeedback {
 
 class SKCommentShakeFeedback: SKCommentFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
-        self.id = json["body"]["id"].stringValue
-        self.count = json["body"]["count"].intValue
-        self.is_mine = json["body"]["is_mine"].boolValue
-        self.comment_text = json["body"]["comment_text"].stringValue
-        self.address = json["body"]["address"].stringValue
-    }
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
+//        self.id = json["body"]["id"].stringValue
+//        self.count = json["body"]["count"].intValue
+//        self.is_mine = json["body"]["is_mine"].boolValue
+//        self.comment_text = json["body"]["comment_text"].stringValue
+//        self.address = json["body"]["address"].stringValue
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {

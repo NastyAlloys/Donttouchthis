@@ -37,9 +37,9 @@ class SKRepostFeedback: SKBaseFeedback {
 
 class SKRepostPublicationFeedback: SKRepostFeedback {
     
-    required init(json: JSON) {
-        super.init(json: json)
-        
+//    required init(json: JSON) {
+//        super.init(json: json)
+//        
 //        self.id = json["body"]["id"].stringValue
 //        self.photos = json["body"]["photos"].arrayObject as? [String]
 //        self.photo_ids = json["body"]["photo_ids"].arrayObject as? [String]
@@ -47,7 +47,7 @@ class SKRepostPublicationFeedback: SKRepostFeedback {
 //        self.is_mine = json["body"]["is_mine"].boolValue
 //        self.text = json["body"]["text"].stringValue
 //        self.is_repost = json["body"]["is_repost"].boolValue
-    }
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {
@@ -92,14 +92,14 @@ class SKRepostPublicationFeedback: SKRepostFeedback {
 
 class SKRepostQuoteFeedback: SKRepostFeedback {
         
-    required init(json: JSON) {
-        super.init(json: json)
-//        
+//    required init(json: JSON) {
+//        super.init(json: json)
+//
 //        self.id = json["body"]["id"].stringValue
 //        self.count = json["body"]["count"].intValue
 //        self.is_mine = json["body"]["is_mine"].boolValue
 //        self.text = json["body"]["text"].stringValue
-    }
+//    }
     
     override var feedbackDescription: Lazy<NSAttributedString> {
         get {

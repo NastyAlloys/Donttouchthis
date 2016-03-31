@@ -129,9 +129,9 @@ class SKAvatarContainerView: UIView {
         let imageTimestamp = self.imageTimestamp
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-            let imageUrl = NSURL(string: user_avatar)
-            let imageData = NSData(contentsOfURL: imageUrl!)
-            let image: UIImage = UIImage(data: imageData!)!
+            guard let imageUrl = NSURL(string: user_avatar) else { return }
+            guard let imageData = NSData(contentsOfURL: imageUrl) else { return }
+            guard let image: UIImage = UIImage(data: imageData) else { return }
             
             dispatch_async(dispatch_get_main_queue()) { [weak self] in
                 guard self?.imageTimestamp == imageTimestamp else { return }

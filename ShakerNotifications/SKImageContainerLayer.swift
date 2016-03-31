@@ -30,9 +30,7 @@ class SKImageContainerLayer: CALayer {
         }
     }
     
-    /*
-    П
-    */
+    // Показывает только те картинки на созданных слоях, которые соответствует индексу из переданнаого параметра количества
     func displayImages(count count: Int, clear: Bool, layerSetupBlock: ((index: Int, layer: CALayer) -> ()) ) {
         guard let sublayers = self.sublayers else { return }
         
@@ -51,6 +49,7 @@ class SKImageContainerLayer: CALayer {
         }
     }
     
+    // Назначает картинку на слой и показывает слой
     func dispayImage(image: UIImage?, atIndex index: Int) {
         guard let sublayers = self.sublayers where index >= 0 && index < sublayers.count else { return }
         let layer = sublayers[index]
@@ -58,6 +57,7 @@ class SKImageContainerLayer: CALayer {
         layer.contents = image?.CGImage
     }
     
+    // Создает одну линию из слоев с переданными параметрами размера и отступа
     func setupLayer(size size: CGSize, offset: CGFloat, maxCount: Int) {
         self.masksToBounds = true
         self.backgroundColor = UIColor.clearColor().CGColor
@@ -85,6 +85,7 @@ class SKImageContainerLayer: CALayer {
         }
     }
     
+    // Создает несколько линий из слоев с переданными параметрами размера и отступа
     func setupLayerWithLines(size size: CGSize, offset: CGFloat, maxCount: Int) {
         
         self.masksToBounds = true
